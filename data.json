@@ -1,1 +1,375 @@
-{"last_update": "2026-07-10 17:12:17", "total": 257, "orders": [{"order_id": "ORD-20260704-0233", "user_id": "USER-3681", "product_name": "床上用品", "category": "家居", "amount": 340.45, "quantity": 3, "order_time": "2026-07-04 08:15:58", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0229", "user_id": "USER-2274", "product_name": "手机", "category": "电子产品", "amount": 5709.36, "quantity": 1, "order_time": "2026-07-04 08:26:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0245", "user_id": "USER-4292", "product_name": "智能手表", "category": "电子产品", "amount": 2754.19, "quantity": 1, "order_time": "2026-07-04 08:44:40", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0242", "user_id": "USER-6836", "product_name": "外套", "category": "服装", "amount": 944.35, "quantity": 1, "order_time": "2026-07-04 09:14:25", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0253", "user_id": "USER-1429", "product_name": "台灯", "category": "家居", "amount": 489.17, "quantity": 2, "order_time": "2026-07-04 09:17:24", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0254", "user_id": "USER-1898", "product_name": "餐具套装", "category": "家居", "amount": 302.79, "quantity": 4, "order_time": "2026-07-04 10:23:53", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0224", "user_id": "USER-5555", "product_name": "台灯", "category": "家居", "amount": 450.65, "quantity": 4, "order_time": "2026-07-04 11:38:24", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0238", "user_id": "USER-5170", "product_name": "衬衫", "category": "服装", "amount": 491.67, "quantity": 5, "order_time": "2026-07-04 11:48:36", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0225", "user_id": "USER-3405", "product_name": "平板电脑", "category": "电子产品", "amount": 5628.4, "quantity": 3, "order_time": "2026-07-04 11:53:34", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0237", "user_id": "USER-7291", "product_name": "收纳盒", "category": "家居", "amount": 51.27, "quantity": 4, "order_time": "2026-07-04 12:02:42", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0251", "user_id": "USER-9605", "product_name": "餐具套装", "category": "家居", "amount": 380.66, "quantity": 4, "order_time": "2026-07-04 12:22:33", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0223", "user_id": "USER-6513", "product_name": "运动鞋", "category": "服装", "amount": 363.9, "quantity": 1, "order_time": "2026-07-04 12:45:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0228", "user_id": "USER-4633", "product_name": "餐具套装", "category": "家居", "amount": 159.88, "quantity": 2, "order_time": "2026-07-04 13:07:30", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0252", "user_id": "USER-4184", "product_name": "耳机", "category": "电子产品", "amount": 1343.7, "quantity": 1, "order_time": "2026-07-04 13:32:02", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0231", "user_id": "USER-9077", "product_name": "床上用品", "category": "家居", "amount": 566.74, "quantity": 1, "order_time": "2026-07-04 13:52:19", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0232", "user_id": "USER-1243", "product_name": "餐具套装", "category": "家居", "amount": 290.19, "quantity": 1, "order_time": "2026-07-04 14:30:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0255", "user_id": "USER-3487", "product_name": "收纳盒", "category": "家居", "amount": 42.81, "quantity": 4, "order_time": "2026-07-04 15:22:52", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0256", "user_id": "USER-8592", "product_name": "装饰画", "category": "家居", "amount": 64.57, "quantity": 4, "order_time": "2026-07-04 15:36:25", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0248", "user_id": "USER-5413", "product_name": "T恤", "category": "服装", "amount": 150.22, "quantity": 3, "order_time": "2026-07-04 15:41:32", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0227", "user_id": "USER-1153", "product_name": "手机", "category": "电子产品", "amount": 5138.33, "quantity": 1, "order_time": "2026-07-04 16:30:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0240", "user_id": "USER-1158", "product_name": "智能手表", "category": "电子产品", "amount": 2598.08, "quantity": 3, "order_time": "2026-07-04 17:05:52", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0244", "user_id": "USER-8282", "product_name": "手机", "category": "电子产品", "amount": 7294.45, "quantity": 4, "order_time": "2026-07-04 17:27:21", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0234", "user_id": "USER-9733", "product_name": "牛奶", "category": "食品", "amount": 58.39, "quantity": 2, "order_time": "2026-07-04 17:49:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0246", "user_id": "USER-6838", "product_name": "收纳盒", "category": "家居", "amount": 45.44, "quantity": 4, "order_time": "2026-07-04 18:45:11", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0257", "user_id": "USER-4719", "product_name": "牛仔裤", "category": "服装", "amount": 412.77, "quantity": 3, "order_time": "2026-07-04 18:47:50", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0236", "user_id": "USER-5932", "product_name": "手机", "category": "电子产品", "amount": 6064.65, "quantity": 4, "order_time": "2026-07-04 19:48:29", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0243", "user_id": "USER-7855", "product_name": "运动鞋", "category": "服装", "amount": 207.57, "quantity": 2, "order_time": "2026-07-04 20:16:50", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0239", "user_id": "USER-4731", "product_name": "餐具套装", "category": "家居", "amount": 121.16, "quantity": 3, "order_time": "2026-07-04 20:29:30", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0230", "user_id": "USER-7267", "product_name": "床上用品", "category": "家居", "amount": 478.36, "quantity": 4, "order_time": "2026-07-04 21:33:49", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0249", "user_id": "USER-8215", "product_name": "台灯", "category": "家居", "amount": 303.19, "quantity": 2, "order_time": "2026-07-04 21:49:39", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0241", "user_id": "USER-2706", "product_name": "T恤", "category": "服装", "amount": 202.62, "quantity": 1, "order_time": "2026-07-04 22:31:16", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0226", "user_id": "USER-1933", "product_name": "T恤", "category": "服装", "amount": 228.19, "quantity": 2, "order_time": "2026-07-04 22:48:47", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0235", "user_id": "USER-8483", "product_name": "手机", "category": "电子产品", "amount": 4511.37, "quantity": 4, "order_time": "2026-07-04 22:49:44", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0247", "user_id": "USER-6880", "product_name": "收纳盒", "category": "家居", "amount": 56.43, "quantity": 3, "order_time": "2026-07-04 22:51:12", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260704-0250", "user_id": "USER-5525", "product_name": "牛奶", "category": "食品", "amount": 53.05, "quantity": 4, "order_time": "2026-07-04 23:23:59", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0211", "user_id": "USER-8659", "product_name": "水果礼盒", "category": "食品", "amount": 91.66, "quantity": 4, "order_time": "2026-07-05 08:15:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0213", "user_id": "USER-5142", "product_name": "零食大礼包", "category": "食品", "amount": 72.29, "quantity": 3, "order_time": "2026-07-05 08:46:51", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0200", "user_id": "USER-9243", "product_name": "台灯", "category": "家居", "amount": 310.45, "quantity": 5, "order_time": "2026-07-05 08:54:02", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0217", "user_id": "USER-1196", "product_name": "面包", "category": "食品", "amount": 25.49, "quantity": 5, "order_time": "2026-07-05 09:31:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0195", "user_id": "USER-2318", "product_name": "衬衫", "category": "服装", "amount": 177.56, "quantity": 3, "order_time": "2026-07-05 10:17:46", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0201", "user_id": "USER-9988", "product_name": "运动鞋", "category": "服装", "amount": 456.19, "quantity": 2, "order_time": "2026-07-05 11:28:24", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0194", "user_id": "USER-8739", "product_name": "台灯", "category": "家居", "amount": 174.8, "quantity": 2, "order_time": "2026-07-05 12:01:36", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0193", "user_id": "USER-5463", "product_name": "耳机", "category": "电子产品", "amount": 638.69, "quantity": 4, "order_time": "2026-07-05 12:25:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0214", "user_id": "USER-3473", "product_name": "零食大礼包", "category": "食品", "amount": 112.91, "quantity": 4, "order_time": "2026-07-05 13:30:20", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0197", "user_id": "USER-6012", "product_name": "饮料", "category": "食品", "amount": 19.61, "quantity": 2, "order_time": "2026-07-05 13:45:40", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0198", "user_id": "USER-2878", "product_name": "收纳盒", "category": "家居", "amount": 89.41, "quantity": 1, "order_time": "2026-07-05 13:47:20", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0202", "user_id": "USER-9963", "product_name": "衬衫", "category": "服装", "amount": 141.47, "quantity": 1, "order_time": "2026-07-05 14:32:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0210", "user_id": "USER-2303", "product_name": "手机", "category": "电子产品", "amount": 3412.72, "quantity": 2, "order_time": "2026-07-05 14:48:06", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0208", "user_id": "USER-3237", "product_name": "餐具套装", "category": "家居", "amount": 297.32, "quantity": 1, "order_time": "2026-07-05 15:19:53", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0207", "user_id": "USER-4557", "product_name": "平板电脑", "category": "电子产品", "amount": 4500.78, "quantity": 2, "order_time": "2026-07-05 15:36:16", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0203", "user_id": "USER-5631", "product_name": "平板电脑", "category": "电子产品", "amount": 2855.39, "quantity": 5, "order_time": "2026-07-05 15:40:17", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0212", "user_id": "USER-8018", "product_name": "T恤", "category": "服装", "amount": 68.67, "quantity": 4, "order_time": "2026-07-05 15:57:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0222", "user_id": "USER-8656", "product_name": "手机", "category": "电子产品", "amount": 4070.25, "quantity": 1, "order_time": "2026-07-05 16:14:49", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0221", "user_id": "USER-3251", "product_name": "饮料", "category": "食品", "amount": 18.81, "quantity": 2, "order_time": "2026-07-05 16:34:49", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0216", "user_id": "USER-6190", "product_name": "面包", "category": "食品", "amount": 27.57, "quantity": 4, "order_time": "2026-07-05 16:42:46", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0219", "user_id": "USER-6623", "product_name": "台灯", "category": "家居", "amount": 140.54, "quantity": 5, "order_time": "2026-07-05 17:58:14", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0192", "user_id": "USER-2341", "product_name": "衬衫", "category": "服装", "amount": 326.27, "quantity": 5, "order_time": "2026-07-05 18:20:35", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0215", "user_id": "USER-4182", "product_name": "台灯", "category": "家居", "amount": 259.23, "quantity": 4, "order_time": "2026-07-05 18:38:40", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0196", "user_id": "USER-8624", "product_name": "平板电脑", "category": "电子产品", "amount": 5563.98, "quantity": 1, "order_time": "2026-07-05 19:02:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0199", "user_id": "USER-4538", "product_name": "平板电脑", "category": "电子产品", "amount": 4482.53, "quantity": 1, "order_time": "2026-07-05 19:12:45", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0209", "user_id": "USER-3929", "product_name": "零食大礼包", "category": "食品", "amount": 74.22, "quantity": 3, "order_time": "2026-07-05 19:15:42", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0206", "user_id": "USER-5465", "product_name": "运动鞋", "category": "服装", "amount": 347.17, "quantity": 5, "order_time": "2026-07-05 19:21:47", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0218", "user_id": "USER-2362", "product_name": "笔记本电脑", "category": "电子产品", "amount": 6742.53, "quantity": 2, "order_time": "2026-07-05 19:23:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0220", "user_id": "USER-6013", "product_name": "饮料", "category": "食品", "amount": 7.99, "quantity": 1, "order_time": "2026-07-05 20:32:15", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0204", "user_id": "USER-2571", "product_name": "衬衫", "category": "服装", "amount": 171.65, "quantity": 3, "order_time": "2026-07-05 20:51:52", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260705-0205", "user_id": "USER-1691", "product_name": "水果礼盒", "category": "食品", "amount": 63.59, "quantity": 4, "order_time": "2026-07-05 22:28:01", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0163", "user_id": "USER-4993", "product_name": "水果礼盒", "category": "食品", "amount": 100.55, "quantity": 5, "order_time": "2026-07-06 08:01:59", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0173", "user_id": "USER-1945", "product_name": "零食大礼包", "category": "食品", "amount": 48.1, "quantity": 2, "order_time": "2026-07-06 08:43:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0180", "user_id": "USER-7191", "product_name": "饮料", "category": "食品", "amount": 14.03, "quantity": 4, "order_time": "2026-07-06 09:32:29", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0190", "user_id": "USER-7726", "product_name": "零食大礼包", "category": "食品", "amount": 87.01, "quantity": 1, "order_time": "2026-07-06 10:29:34", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0191", "user_id": "USER-3896", "product_name": "耳机", "category": "电子产品", "amount": 1468.45, "quantity": 4, "order_time": "2026-07-06 10:36:00", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0170", "user_id": "USER-8741", "product_name": "床上用品", "category": "家居", "amount": 674.49, "quantity": 1, "order_time": "2026-07-06 10:55:06", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0166", "user_id": "USER-1227", "product_name": "笔记本电脑", "category": "电子产品", "amount": 6516.97, "quantity": 5, "order_time": "2026-07-06 10:56:19", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0182", "user_id": "USER-7156", "product_name": "床上用品", "category": "家居", "amount": 719.74, "quantity": 3, "order_time": "2026-07-06 11:22:39", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0168", "user_id": "USER-8454", "product_name": "饮料", "category": "食品", "amount": 12.94, "quantity": 2, "order_time": "2026-07-06 12:56:55", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0185", "user_id": "USER-4979", "product_name": "T恤", "category": "服装", "amount": 270.78, "quantity": 5, "order_time": "2026-07-06 13:13:45", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0176", "user_id": "USER-5658", "product_name": "台灯", "category": "家居", "amount": 484.0, "quantity": 5, "order_time": "2026-07-06 13:31:02", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0171", "user_id": "USER-7789", "product_name": "水果礼盒", "category": "食品", "amount": 149.96, "quantity": 2, "order_time": "2026-07-06 15:20:41", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0177", "user_id": "USER-6299", "product_name": "面包", "category": "食品", "amount": 10.74, "quantity": 5, "order_time": "2026-07-06 15:39:03", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0175", "user_id": "USER-6958", "product_name": "水果礼盒", "category": "食品", "amount": 75.09, "quantity": 2, "order_time": "2026-07-06 15:41:17", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0183", "user_id": "USER-1894", "product_name": "T恤", "category": "服装", "amount": 297.61, "quantity": 1, "order_time": "2026-07-06 16:02:43", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0167", "user_id": "USER-1108", "product_name": "牛奶", "category": "食品", "amount": 48.65, "quantity": 4, "order_time": "2026-07-06 16:43:37", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0162", "user_id": "USER-3382", "product_name": "牛仔裤", "category": "服装", "amount": 397.93, "quantity": 5, "order_time": "2026-07-06 17:39:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0178", "user_id": "USER-9889", "product_name": "笔记本电脑", "category": "电子产品", "amount": 9186.14, "quantity": 1, "order_time": "2026-07-06 17:42:38", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0187", "user_id": "USER-1238", "product_name": "平板电脑", "category": "电子产品", "amount": 2895.67, "quantity": 1, "order_time": "2026-07-06 17:48:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0189", "user_id": "USER-4945", "product_name": "T恤", "category": "服装", "amount": 297.14, "quantity": 1, "order_time": "2026-07-06 17:49:55", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0164", "user_id": "USER-5821", "product_name": "餐具套装", "category": "家居", "amount": 321.77, "quantity": 5, "order_time": "2026-07-06 17:57:16", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0179", "user_id": "USER-3868", "product_name": "收纳盒", "category": "家居", "amount": 95.75, "quantity": 3, "order_time": "2026-07-06 18:02:28", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0184", "user_id": "USER-9129", "product_name": "床上用品", "category": "家居", "amount": 519.42, "quantity": 3, "order_time": "2026-07-06 18:12:37", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0161", "user_id": "USER-5536", "product_name": "水果礼盒", "category": "食品", "amount": 139.45, "quantity": 4, "order_time": "2026-07-06 18:56:59", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0181", "user_id": "USER-8785", "product_name": "衬衫", "category": "服装", "amount": 391.09, "quantity": 4, "order_time": "2026-07-06 19:03:29", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0172", "user_id": "USER-3496", "product_name": "手机", "category": "电子产品", "amount": 6739.0, "quantity": 4, "order_time": "2026-07-06 19:09:53", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0186", "user_id": "USER-7732", "product_name": "外套", "category": "服装", "amount": 761.95, "quantity": 1, "order_time": "2026-07-06 19:35:16", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0165", "user_id": "USER-2962", "product_name": "T恤", "category": "服装", "amount": 55.68, "quantity": 4, "order_time": "2026-07-06 20:17:17", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0174", "user_id": "USER-9487", "product_name": "水果礼盒", "category": "食品", "amount": 52.45, "quantity": 1, "order_time": "2026-07-06 21:54:01", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0188", "user_id": "USER-1348", "product_name": "台灯", "category": "家居", "amount": 361.1, "quantity": 2, "order_time": "2026-07-06 22:16:43", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260706-0169", "user_id": "USER-6144", "product_name": "台灯", "category": "家居", "amount": 456.13, "quantity": 2, "order_time": "2026-07-06 22:21:31", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0133", "user_id": "USER-1261", "product_name": "牛仔裤", "category": "服装", "amount": 500.04, "quantity": 5, "order_time": "2026-07-07 10:02:59", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0126", "user_id": "USER-7214", "product_name": "零食大礼包", "category": "食品", "amount": 72.6, "quantity": 1, "order_time": "2026-07-07 10:04:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0148", "user_id": "USER-3985", "product_name": "衬衫", "category": "服装", "amount": 355.16, "quantity": 2, "order_time": "2026-07-07 10:08:11", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0159", "user_id": "USER-3052", "product_name": "台灯", "category": "家居", "amount": 240.16, "quantity": 3, "order_time": "2026-07-07 10:17:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0134", "user_id": "USER-8989", "product_name": "牛奶", "category": "食品", "amount": 36.21, "quantity": 4, "order_time": "2026-07-07 10:42:55", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0123", "user_id": "USER-9514", "product_name": "外套", "category": "服装", "amount": 391.27, "quantity": 2, "order_time": "2026-07-07 11:28:48", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0153", "user_id": "USER-9607", "product_name": "台灯", "category": "家居", "amount": 310.53, "quantity": 2, "order_time": "2026-07-07 11:28:48", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0151", "user_id": "USER-2166", "product_name": "水果礼盒", "category": "食品", "amount": 77.81, "quantity": 3, "order_time": "2026-07-07 12:09:42", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0150", "user_id": "USER-8267", "product_name": "T恤", "category": "服装", "amount": 257.56, "quantity": 3, "order_time": "2026-07-07 12:15:48", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0120", "user_id": "USER-1040", "product_name": "床上用品", "category": "家居", "amount": 451.44, "quantity": 3, "order_time": "2026-07-07 12:48:36", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0127", "user_id": "USER-7645", "product_name": "牛奶", "category": "食品", "amount": 59.81, "quantity": 4, "order_time": "2026-07-07 13:38:07", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0138", "user_id": "USER-4346", "product_name": "笔记本电脑", "category": "电子产品", "amount": 8530.63, "quantity": 5, "order_time": "2026-07-07 13:45:50", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0146", "user_id": "USER-8366", "product_name": "饮料", "category": "食品", "amount": 18.88, "quantity": 2, "order_time": "2026-07-07 13:47:30", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0149", "user_id": "USER-1764", "product_name": "耳机", "category": "电子产品", "amount": 684.77, "quantity": 2, "order_time": "2026-07-07 15:29:36", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0144", "user_id": "USER-2476", "product_name": "T恤", "category": "服装", "amount": 219.9, "quantity": 2, "order_time": "2026-07-07 15:52:49", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0122", "user_id": "USER-3737", "product_name": "外套", "category": "服装", "amount": 1097.52, "quantity": 2, "order_time": "2026-07-07 16:12:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0135", "user_id": "USER-3440", "product_name": "智能手表", "category": "电子产品", "amount": 2183.32, "quantity": 4, "order_time": "2026-07-07 16:50:09", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0139", "user_id": "USER-9282", "product_name": "餐具套装", "category": "家居", "amount": 222.86, "quantity": 3, "order_time": "2026-07-07 16:51:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0130", "user_id": "USER-4429", "product_name": "台灯", "category": "家居", "amount": 427.65, "quantity": 2, "order_time": "2026-07-07 17:38:36", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0156", "user_id": "USER-6854", "product_name": "餐具套装", "category": "家居", "amount": 232.45, "quantity": 3, "order_time": "2026-07-07 17:39:58", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0157", "user_id": "USER-5373", "product_name": "耳机", "category": "电子产品", "amount": 618.01, "quantity": 2, "order_time": "2026-07-07 17:42:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0132", "user_id": "USER-1666", "product_name": "台灯", "category": "家居", "amount": 403.45, "quantity": 5, "order_time": "2026-07-07 18:00:22", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0145", "user_id": "USER-7933", "product_name": "水果礼盒", "category": "食品", "amount": 85.37, "quantity": 4, "order_time": "2026-07-07 18:02:59", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0137", "user_id": "USER-5173", "product_name": "T恤", "category": "服装", "amount": 111.25, "quantity": 2, "order_time": "2026-07-07 18:27:07", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0154", "user_id": "USER-8637", "product_name": "零食大礼包", "category": "食品", "amount": 55.11, "quantity": 3, "order_time": "2026-07-07 18:29:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0140", "user_id": "USER-7074", "product_name": "外套", "category": "服装", "amount": 628.86, "quantity": 5, "order_time": "2026-07-07 19:05:06", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0125", "user_id": "USER-7554", "product_name": "床上用品", "category": "家居", "amount": 774.46, "quantity": 4, "order_time": "2026-07-07 19:05:21", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0155", "user_id": "USER-5405", "product_name": "收纳盒", "category": "家居", "amount": 59.19, "quantity": 2, "order_time": "2026-07-07 19:12:47", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0158", "user_id": "USER-3818", "product_name": "衬衫", "category": "服装", "amount": 396.38, "quantity": 4, "order_time": "2026-07-07 20:13:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0147", "user_id": "USER-7260", "product_name": "牛奶", "category": "食品", "amount": 49.78, "quantity": 1, "order_time": "2026-07-07 20:13:08", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0143", "user_id": "USER-7452", "product_name": "餐具套装", "category": "家居", "amount": 357.32, "quantity": 1, "order_time": "2026-07-07 20:30:39", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0131", "user_id": "USER-2682", "product_name": "笔记本电脑", "category": "电子产品", "amount": 6727.06, "quantity": 1, "order_time": "2026-07-07 20:53:12", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0142", "user_id": "USER-1970", "product_name": "收纳盒", "category": "家居", "amount": 98.46, "quantity": 5, "order_time": "2026-07-07 21:09:06", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0121", "user_id": "USER-2089", "product_name": "零食大礼包", "category": "食品", "amount": 44.44, "quantity": 2, "order_time": "2026-07-07 22:03:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0136", "user_id": "USER-5874", "product_name": "餐具套装", "category": "家居", "amount": 128.98, "quantity": 3, "order_time": "2026-07-07 22:13:38", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0160", "user_id": "USER-2584", "product_name": "收纳盒", "category": "家居", "amount": 83.09, "quantity": 5, "order_time": "2026-07-07 22:15:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0141", "user_id": "USER-6745", "product_name": "外套", "category": "服装", "amount": 1037.54, "quantity": 3, "order_time": "2026-07-07 22:16:45", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0128", "user_id": "USER-5566", "product_name": "外套", "category": "服装", "amount": 1134.02, "quantity": 5, "order_time": "2026-07-07 22:30:05", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0152", "user_id": "USER-4094", "product_name": "台灯", "category": "家居", "amount": 235.6, "quantity": 2, "order_time": "2026-07-07 23:09:36", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0124", "user_id": "USER-3222", "product_name": "装饰画", "category": "家居", "amount": 285.61, "quantity": 4, "order_time": "2026-07-07 23:41:26", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260707-0129", "user_id": "USER-7102", "product_name": "手机", "category": "电子产品", "amount": 6500.29, "quantity": 4, "order_time": "2026-07-07 23:58:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0098", "user_id": "USER-9477", "product_name": "装饰画", "category": "家居", "amount": 58.73, "quantity": 2, "order_time": "2026-07-08 08:23:07", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0101", "user_id": "USER-4194", "product_name": "运动鞋", "category": "服装", "amount": 265.39, "quantity": 2, "order_time": "2026-07-08 08:32:50", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0089", "user_id": "USER-3181", "product_name": "面包", "category": "食品", "amount": 24.67, "quantity": 1, "order_time": "2026-07-08 08:34:45", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0102", "user_id": "USER-1883", "product_name": "耳机", "category": "电子产品", "amount": 438.8, "quantity": 2, "order_time": "2026-07-08 08:49:51", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0083", "user_id": "USER-8907", "product_name": "零食大礼包", "category": "食品", "amount": 48.05, "quantity": 2, "order_time": "2026-07-08 08:57:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0103", "user_id": "USER-8065", "product_name": "牛仔裤", "category": "服装", "amount": 393.85, "quantity": 5, "order_time": "2026-07-08 09:20:10", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0082", "user_id": "USER-3442", "product_name": "牛奶", "category": "食品", "amount": 31.29, "quantity": 4, "order_time": "2026-07-08 09:45:21", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0110", "user_id": "USER-5339", "product_name": "台灯", "category": "家居", "amount": 213.47, "quantity": 1, "order_time": "2026-07-08 10:00:43", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0091", "user_id": "USER-8382", "product_name": "运动鞋", "category": "服装", "amount": 350.8, "quantity": 4, "order_time": "2026-07-08 10:13:39", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0084", "user_id": "USER-6192", "product_name": "收纳盒", "category": "家居", "amount": 43.98, "quantity": 4, "order_time": "2026-07-08 10:27:43", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0074", "user_id": "USER-5796", "product_name": "外套", "category": "服装", "amount": 897.42, "quantity": 5, "order_time": "2026-07-08 10:40:30", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0080", "user_id": "USER-3971", "product_name": "收纳盒", "category": "家居", "amount": 57.7, "quantity": 1, "order_time": "2026-07-08 10:54:49", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0079", "user_id": "USER-8535", "product_name": "衬衫", "category": "服装", "amount": 383.77, "quantity": 1, "order_time": "2026-07-08 11:03:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0085", "user_id": "USER-8038", "product_name": "T恤", "category": "服装", "amount": 190.24, "quantity": 4, "order_time": "2026-07-08 11:35:28", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0073", "user_id": "USER-9988", "product_name": "外套", "category": "服装", "amount": 907.53, "quantity": 1, "order_time": "2026-07-08 12:15:50", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0105", "user_id": "USER-5847", "product_name": "平板电脑", "category": "电子产品", "amount": 5027.26, "quantity": 1, "order_time": "2026-07-08 12:55:20", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0108", "user_id": "USER-5087", "product_name": "牛仔裤", "category": "服装", "amount": 245.72, "quantity": 3, "order_time": "2026-07-08 13:04:21", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0071", "user_id": "USER-2277", "product_name": "牛奶", "category": "食品", "amount": 37.8, "quantity": 4, "order_time": "2026-07-08 13:17:32", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0087", "user_id": "USER-8606", "product_name": "外套", "category": "服装", "amount": 1053.91, "quantity": 2, "order_time": "2026-07-08 14:16:00", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0112", "user_id": "USER-1023", "product_name": "装饰画", "category": "家居", "amount": 117.73, "quantity": 4, "order_time": "2026-07-08 14:18:20", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0114", "user_id": "USER-7150", "product_name": "牛仔裤", "category": "服装", "amount": 524.79, "quantity": 2, "order_time": "2026-07-08 14:24:57", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0116", "user_id": "USER-4138", "product_name": "智能手表", "category": "电子产品", "amount": 991.87, "quantity": 1, "order_time": "2026-07-08 15:13:29", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0106", "user_id": "USER-8480", "product_name": "饮料", "category": "食品", "amount": 18.48, "quantity": 2, "order_time": "2026-07-08 15:23:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0111", "user_id": "USER-5747", "product_name": "平板电脑", "category": "电子产品", "amount": 3898.72, "quantity": 3, "order_time": "2026-07-08 15:47:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0096", "user_id": "USER-4469", "product_name": "台灯", "category": "家居", "amount": 457.22, "quantity": 5, "order_time": "2026-07-08 16:14:18", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0109", "user_id": "USER-6384", "product_name": "台灯", "category": "家居", "amount": 358.0, "quantity": 1, "order_time": "2026-07-08 16:20:18", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0117", "user_id": "USER-5485", "product_name": "手机", "category": "电子产品", "amount": 4085.32, "quantity": 4, "order_time": "2026-07-08 16:25:48", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0107", "user_id": "USER-3586", "product_name": "衬衫", "category": "服装", "amount": 357.6, "quantity": 4, "order_time": "2026-07-08 17:16:57", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0099", "user_id": "USER-5835", "product_name": "耳机", "category": "电子产品", "amount": 986.41, "quantity": 1, "order_time": "2026-07-08 17:22:22", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0119", "user_id": "USER-1117", "product_name": "零食大礼包", "category": "食品", "amount": 110.79, "quantity": 3, "order_time": "2026-07-08 17:48:46", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0095", "user_id": "USER-9996", "product_name": "收纳盒", "category": "家居", "amount": 88.71, "quantity": 4, "order_time": "2026-07-08 17:56:52", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0072", "user_id": "USER-6452", "product_name": "平板电脑", "category": "电子产品", "amount": 4675.61, "quantity": 3, "order_time": "2026-07-08 18:16:40", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0075", "user_id": "USER-4472", "product_name": "牛仔裤", "category": "服装", "amount": 488.09, "quantity": 3, "order_time": "2026-07-08 18:21:46", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0090", "user_id": "USER-2878", "product_name": "面包", "category": "食品", "amount": 22.35, "quantity": 4, "order_time": "2026-07-08 19:28:26", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0077", "user_id": "USER-7875", "product_name": "笔记本电脑", "category": "电子产品", "amount": 5976.29, "quantity": 3, "order_time": "2026-07-08 19:42:01", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0092", "user_id": "USER-2880", "product_name": "智能手表", "category": "电子产品", "amount": 918.5, "quantity": 4, "order_time": "2026-07-08 19:57:59", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0097", "user_id": "USER-4492", "product_name": "手机", "category": "电子产品", "amount": 5243.42, "quantity": 4, "order_time": "2026-07-08 20:32:51", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0118", "user_id": "USER-1763", "product_name": "面包", "category": "食品", "amount": 20.01, "quantity": 1, "order_time": "2026-07-08 20:35:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0113", "user_id": "USER-1314", "product_name": "牛仔裤", "category": "服装", "amount": 168.0, "quantity": 4, "order_time": "2026-07-08 20:39:58", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0086", "user_id": "USER-3440", "product_name": "智能手表", "category": "电子产品", "amount": 2022.73, "quantity": 3, "order_time": "2026-07-08 20:59:48", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0104", "user_id": "USER-6182", "product_name": "床上用品", "category": "家居", "amount": 335.7, "quantity": 1, "order_time": "2026-07-08 21:11:44", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0078", "user_id": "USER-7246", "product_name": "装饰画", "category": "家居", "amount": 215.76, "quantity": 2, "order_time": "2026-07-08 21:28:08", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0094", "user_id": "USER-8788", "product_name": "平板电脑", "category": "电子产品", "amount": 3710.63, "quantity": 3, "order_time": "2026-07-08 21:50:46", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0100", "user_id": "USER-3846", "product_name": "平板电脑", "category": "电子产品", "amount": 3849.93, "quantity": 3, "order_time": "2026-07-08 21:59:22", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0093", "user_id": "USER-7517", "product_name": "床上用品", "category": "家居", "amount": 284.16, "quantity": 1, "order_time": "2026-07-08 22:11:37", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0088", "user_id": "USER-9677", "product_name": "外套", "category": "服装", "amount": 317.65, "quantity": 2, "order_time": "2026-07-08 22:22:18", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0081", "user_id": "USER-6764", "product_name": "餐具套装", "category": "家居", "amount": 350.86, "quantity": 1, "order_time": "2026-07-08 22:32:43", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0115", "user_id": "USER-7745", "product_name": "衬衫", "category": "服装", "amount": 127.41, "quantity": 2, "order_time": "2026-07-08 23:16:31", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260708-0076", "user_id": "USER-7401", "product_name": "水果礼盒", "category": "食品", "amount": 141.83, "quantity": 4, "order_time": "2026-07-08 23:34:35", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0054", "user_id": "USER-5452", "product_name": "智能手表", "category": "电子产品", "amount": 2762.11, "quantity": 5, "order_time": "2026-07-09 08:36:14", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0063", "user_id": "USER-6725", "product_name": "外套", "category": "服装", "amount": 545.61, "quantity": 2, "order_time": "2026-07-09 09:04:56", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0041", "user_id": "USER-6837", "product_name": "衬衫", "category": "服装", "amount": 237.58, "quantity": 3, "order_time": "2026-07-09 10:36:41", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0040", "user_id": "USER-7864", "product_name": "床上用品", "category": "家居", "amount": 374.68, "quantity": 2, "order_time": "2026-07-09 11:22:32", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0050", "user_id": "USER-3018", "product_name": "水果礼盒", "category": "食品", "amount": 77.99, "quantity": 4, "order_time": "2026-07-09 13:46:46", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0069", "user_id": "USER-1864", "product_name": "面包", "category": "食品", "amount": 13.87, "quantity": 4, "order_time": "2026-07-09 14:12:09", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0056", "user_id": "USER-1973", "product_name": "台灯", "category": "家居", "amount": 385.03, "quantity": 4, "order_time": "2026-07-09 14:14:11", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0043", "user_id": "USER-9619", "product_name": "装饰画", "category": "家居", "amount": 177.11, "quantity": 2, "order_time": "2026-07-09 14:14:31", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0039", "user_id": "USER-3041", "product_name": "衬衫", "category": "服装", "amount": 497.22, "quantity": 2, "order_time": "2026-07-09 15:08:41", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0051", "user_id": "USER-4400", "product_name": "牛仔裤", "category": "服装", "amount": 187.3, "quantity": 2, "order_time": "2026-07-09 15:38:49", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0061", "user_id": "USER-8168", "product_name": "饮料", "category": "食品", "amount": 12.47, "quantity": 1, "order_time": "2026-07-09 16:19:48", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0066", "user_id": "USER-9618", "product_name": "笔记本电脑", "category": "电子产品", "amount": 7579.81, "quantity": 1, "order_time": "2026-07-09 17:04:22", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0068", "user_id": "USER-5043", "product_name": "床上用品", "category": "家居", "amount": 207.45, "quantity": 3, "order_time": "2026-07-09 17:29:00", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0038", "user_id": "USER-8613", "product_name": "手机", "category": "电子产品", "amount": 4828.97, "quantity": 1, "order_time": "2026-07-09 18:12:17", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0060", "user_id": "USER-7662", "product_name": "装饰画", "category": "家居", "amount": 55.71, "quantity": 3, "order_time": "2026-07-09 18:19:35", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0037", "user_id": "USER-6463", "product_name": "智能手表", "category": "电子产品", "amount": 828.14, "quantity": 4, "order_time": "2026-07-09 18:37:19", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0045", "user_id": "USER-8685", "product_name": "水果礼盒", "category": "食品", "amount": 97.37, "quantity": 1, "order_time": "2026-07-09 18:44:47", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0064", "user_id": "USER-6011", "product_name": "平板电脑", "category": "电子产品", "amount": 3414.06, "quantity": 3, "order_time": "2026-07-09 18:55:35", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0055", "user_id": "USER-6261", "product_name": "收纳盒", "category": "家居", "amount": 60.42, "quantity": 5, "order_time": "2026-07-09 19:00:17", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0065", "user_id": "USER-6953", "product_name": "外套", "category": "服装", "amount": 606.43, "quantity": 3, "order_time": "2026-07-09 19:04:32", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0057", "user_id": "USER-9175", "product_name": "水果礼盒", "category": "食品", "amount": 126.11, "quantity": 5, "order_time": "2026-07-09 19:46:32", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0070", "user_id": "USER-7060", "product_name": "水果礼盒", "category": "食品", "amount": 85.02, "quantity": 1, "order_time": "2026-07-09 19:51:33", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0052", "user_id": "USER-8520", "product_name": "零食大礼包", "category": "食品", "amount": 117.29, "quantity": 4, "order_time": "2026-07-09 19:58:20", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0044", "user_id": "USER-6182", "product_name": "餐具套装", "category": "家居", "amount": 278.79, "quantity": 5, "order_time": "2026-07-09 20:35:52", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0036", "user_id": "USER-6229", "product_name": "运动鞋", "category": "服装", "amount": 451.79, "quantity": 1, "order_time": "2026-07-09 20:48:06", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0042", "user_id": "USER-6002", "product_name": "衬衫", "category": "服装", "amount": 288.62, "quantity": 5, "order_time": "2026-07-09 20:53:54", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0058", "user_id": "USER-9937", "product_name": "牛仔裤", "category": "服装", "amount": 330.38, "quantity": 1, "order_time": "2026-07-09 21:16:57", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0059", "user_id": "USER-8028", "product_name": "外套", "category": "服装", "amount": 345.95, "quantity": 4, "order_time": "2026-07-09 21:32:19", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0049", "user_id": "USER-5976", "product_name": "智能手表", "category": "电子产品", "amount": 2194.9, "quantity": 3, "order_time": "2026-07-09 22:21:20", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0062", "user_id": "USER-6235", "product_name": "外套", "category": "服装", "amount": 957.49, "quantity": 1, "order_time": "2026-07-09 22:30:49", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0053", "user_id": "USER-8307", "product_name": "台灯", "category": "家居", "amount": 224.67, "quantity": 2, "order_time": "2026-07-09 22:32:30", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0047", "user_id": "USER-4058", "product_name": "装饰画", "category": "家居", "amount": 177.63, "quantity": 1, "order_time": "2026-07-09 22:48:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0067", "user_id": "USER-1254", "product_name": "装饰画", "category": "家居", "amount": 269.64, "quantity": 2, "order_time": "2026-07-09 23:05:43", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0046", "user_id": "USER-2777", "product_name": "床上用品", "category": "家居", "amount": 415.08, "quantity": 2, "order_time": "2026-07-09 23:43:46", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260709-0048", "user_id": "USER-5009", "product_name": "平板电脑", "category": "电子产品", "amount": 5964.73, "quantity": 3, "order_time": "2026-07-09 23:46:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0029", "user_id": "USER-4115", "product_name": "收纳盒", "category": "家居", "amount": 79.25, "quantity": 2, "order_time": "2026-07-10 08:03:27", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0026", "user_id": "USER-1399", "product_name": "智能手表", "category": "电子产品", "amount": 1076.68, "quantity": 5, "order_time": "2026-07-10 08:14:35", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0028", "user_id": "USER-3870", "product_name": "笔记本电脑", "category": "电子产品", "amount": 4488.65, "quantity": 4, "order_time": "2026-07-10 09:10:45", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0013", "user_id": "USER-7079", "product_name": "面包", "category": "食品", "amount": 24.04, "quantity": 5, "order_time": "2026-07-10 09:14:23", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0005", "user_id": "USER-5416", "product_name": "面包", "category": "食品", "amount": 11.16, "quantity": 5, "order_time": "2026-07-10 09:16:07", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0015", "user_id": "USER-6036", "product_name": "智能手表", "category": "电子产品", "amount": 2067.6, "quantity": 3, "order_time": "2026-07-10 10:27:30", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0004", "user_id": "USER-5348", "product_name": "耳机", "category": "电子产品", "amount": 1424.52, "quantity": 1, "order_time": "2026-07-10 11:00:47", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0022", "user_id": "USER-2551", "product_name": "水果礼盒", "category": "食品", "amount": 145.44, "quantity": 5, "order_time": "2026-07-10 11:28:28", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0024", "user_id": "USER-5588", "product_name": "衬衫", "category": "服装", "amount": 388.68, "quantity": 3, "order_time": "2026-07-10 13:14:24", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0003", "user_id": "USER-2787", "product_name": "手机", "category": "电子产品", "amount": 6290.02, "quantity": 4, "order_time": "2026-07-10 13:34:45", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0025", "user_id": "USER-2832", "product_name": "面包", "category": "食品", "amount": 23.91, "quantity": 5, "order_time": "2026-07-10 14:43:18", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0019", "user_id": "USER-5365", "product_name": "装饰画", "category": "家居", "amount": 222.04, "quantity": 5, "order_time": "2026-07-10 15:20:55", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0030", "user_id": "USER-8481", "product_name": "衬衫", "category": "服装", "amount": 134.72, "quantity": 2, "order_time": "2026-07-10 16:26:56", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0014", "user_id": "USER-9230", "product_name": "运动鞋", "category": "服装", "amount": 641.6, "quantity": 2, "order_time": "2026-07-10 17:10:16", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0031", "user_id": "USER-5565", "product_name": "饮料", "category": "食品", "amount": 9.18, "quantity": 4, "order_time": "2026-07-10 17:16:32", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0016", "user_id": "USER-7624", "product_name": "饮料", "category": "食品", "amount": 12.91, "quantity": 5, "order_time": "2026-07-10 17:27:11", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0017", "user_id": "USER-1991", "product_name": "平板电脑", "category": "电子产品", "amount": 2617.75, "quantity": 5, "order_time": "2026-07-10 17:29:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0020", "user_id": "USER-6435", "product_name": "运动鞋", "category": "服装", "amount": 398.85, "quantity": 2, "order_time": "2026-07-10 17:35:10", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0010", "user_id": "USER-5755", "product_name": "笔记本电脑", "category": "电子产品", "amount": 10688.0, "quantity": 4, "order_time": "2026-07-10 17:48:19", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0023", "user_id": "USER-5321", "product_name": "饮料", "category": "食品", "amount": 16.75, "quantity": 2, "order_time": "2026-07-10 17:52:04", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0006", "user_id": "USER-2743", "product_name": "收纳盒", "category": "家居", "amount": 98.97, "quantity": 5, "order_time": "2026-07-10 17:58:21", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0032", "user_id": "USER-9398", "product_name": "牛奶", "category": "食品", "amount": 31.85, "quantity": 3, "order_time": "2026-07-10 18:00:50", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0035", "user_id": "USER-9440", "product_name": "手机", "category": "电子产品", "amount": 4442.39, "quantity": 3, "order_time": "2026-07-10 18:18:10", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0011", "user_id": "USER-9690", "product_name": "外套", "category": "服装", "amount": 658.84, "quantity": 4, "order_time": "2026-07-10 19:06:36", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0002", "user_id": "USER-5008", "product_name": "平板电脑", "category": "电子产品", "amount": 4220.76, "quantity": 4, "order_time": "2026-07-10 19:41:37", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0001", "user_id": "USER-3611", "product_name": "台灯", "category": "家居", "amount": 180.06, "quantity": 4, "order_time": "2026-07-10 19:48:55", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0018", "user_id": "USER-9912", "product_name": "牛仔裤", "category": "服装", "amount": 166.76, "quantity": 2, "order_time": "2026-07-10 20:06:55", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0021", "user_id": "USER-7654", "product_name": "面包", "category": "食品", "amount": 13.93, "quantity": 5, "order_time": "2026-07-10 20:25:10", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0027", "user_id": "USER-4431", "product_name": "床上用品", "category": "家居", "amount": 574.01, "quantity": 1, "order_time": "2026-07-10 20:38:42", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0007", "user_id": "USER-4920", "product_name": "T恤", "category": "服装", "amount": 285.06, "quantity": 3, "order_time": "2026-07-10 21:01:13", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0008", "user_id": "USER-9816", "product_name": "衬衫", "category": "服装", "amount": 291.67, "quantity": 3, "order_time": "2026-07-10 22:51:56", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0033", "user_id": "USER-4220", "product_name": "零食大礼包", "category": "食品", "amount": 74.19, "quantity": 4, "order_time": "2026-07-10 23:01:26", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0034", "user_id": "USER-5360", "product_name": "智能手表", "category": "电子产品", "amount": 1460.55, "quantity": 4, "order_time": "2026-07-10 23:22:17", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0012", "user_id": "USER-6732", "product_name": "耳机", "category": "电子产品", "amount": 1435.04, "quantity": 1, "order_time": "2026-07-10 23:31:21", "sync_time": "2026-07-10 17:12:17"}, {"order_id": "ORD-20260710-0009", "user_id": "USER-2782", "product_name": "饮料", "category": "食品", "amount": 11.04, "quantity": 3, "order_time": "2026-07-10 23:45:33", "sync_time": "2026-07-10 17:12:17"}]}
+{
+  "update_time": "2026-07-10 17:13:04",
+  "dates": [
+    "07-04",
+    "07-05",
+    "07-06",
+    "07-07",
+    "07-08",
+    "07-09",
+    "07-10"
+  ],
+  "full_dates": [
+    "2026-07-04",
+    "2026-07-05",
+    "2026-07-06",
+    "2026-07-07",
+    "2026-07-08",
+    "2026-07-09",
+    "2026-07-10"
+  ],
+  "daily_all": [
+    {
+      "date": "2026-07-10",
+      "date_short": "07-10",
+      "order_count": 35,
+      "total_sales": 44706.87,
+      "total_quantity": 122,
+      "avg_order_value": 1277.34
+    },
+    {
+      "date": "2026-07-09",
+      "date_short": "07-09",
+      "order_count": 35,
+      "total_sales": 35177.42,
+      "total_quantity": 95,
+      "avg_order_value": 1005.07
+    },
+    {
+      "date": "2026-07-08",
+      "date_short": "07-08",
+      "order_count": 49,
+      "total_sales": 51534.95,
+      "total_quantity": 131,
+      "avg_order_value": 1051.73
+    },
+    {
+      "date": "2026-07-07",
+      "date_short": "07-07",
+      "order_count": 41,
+      "total_sales": 36184.84,
+      "total_quantity": 124,
+      "avg_order_value": 882.56
+    },
+    {
+      "date": "2026-07-06",
+      "date_short": "07-06",
+      "order_count": 31,
+      "total_sales": 33649.78,
+      "total_quantity": 92,
+      "avg_order_value": 1085.48
+    },
+    {
+      "date": "2026-07-05",
+      "date_short": "07-05",
+      "order_count": 31,
+      "total_sales": 35741.74,
+      "total_quantity": 91,
+      "avg_order_value": 1152.96
+    },
+    {
+      "date": "2026-07-04",
+      "date_short": "07-04",
+      "order_count": 35,
+      "total_sales": 48299.02,
+      "total_quantity": 95,
+      "avg_order_value": 1379.97
+    }
+  ],
+  "category_daily": {
+    "家居": {
+      "2026-07-04": {
+        "order_count": 16,
+        "total_sales": 4143.76,
+        "total_quantity": 49
+      },
+      "2026-07-05": {
+        "order_count": 6,
+        "total_sales": 1271.75,
+        "total_quantity": 18
+      },
+      "2026-07-06": {
+        "order_count": 8,
+        "total_sales": 3632.4,
+        "total_quantity": 24
+      },
+      "2026-07-07": {
+        "order_count": 15,
+        "total_sales": 4311.25,
+        "total_quantity": 47
+      },
+      "2026-07-08": {
+        "order_count": 12,
+        "total_sales": 2582.02,
+        "total_quantity": 27
+      },
+      "2026-07-09": {
+        "order_count": 11,
+        "total_sales": 2626.21,
+        "total_quantity": 31
+      },
+      "2026-07-10": {
+        "order_count": 5,
+        "total_sales": 1154.33,
+        "total_quantity": 17
+      }
+    },
+    "服装": {
+      "2026-07-04": {
+        "order_count": 8,
+        "total_sales": 3001.29,
+        "total_quantity": 18
+      },
+      "2026-07-05": {
+        "order_count": 7,
+        "total_sales": 1688.98,
+        "total_quantity": 23
+      },
+      "2026-07-06": {
+        "order_count": 7,
+        "total_sales": 2472.18,
+        "total_quantity": 21
+      },
+      "2026-07-07": {
+        "order_count": 11,
+        "total_sales": 6129.5,
+        "total_quantity": 35
+      },
+      "2026-07-08": {
+        "order_count": 15,
+        "total_sales": 6672.17,
+        "total_quantity": 44
+      },
+      "2026-07-09": {
+        "order_count": 10,
+        "total_sales": 4448.37,
+        "total_quantity": 24
+      },
+      "2026-07-10": {
+        "order_count": 8,
+        "total_sales": 2966.18,
+        "total_quantity": 21
+      }
+    },
+    "电子产品": {
+      "2026-07-04": {
+        "order_count": 9,
+        "total_sales": 41042.53,
+        "total_quantity": 22
+      },
+      "2026-07-05": {
+        "order_count": 8,
+        "total_sales": 32266.87,
+        "total_quantity": 18
+      },
+      "2026-07-06": {
+        "order_count": 5,
+        "total_sales": 26806.23,
+        "total_quantity": 15
+      },
+      "2026-07-07": {
+        "order_count": 6,
+        "total_sales": 25244.08,
+        "total_quantity": 18
+      },
+      "2026-07-08": {
+        "order_count": 13,
+        "total_sales": 41825.49,
+        "total_quantity": 35
+      },
+      "2026-07-09": {
+        "order_count": 7,
+        "total_sales": 27572.72,
+        "total_quantity": 20
+      },
+      "2026-07-10": {
+        "order_count": 11,
+        "total_sales": 40211.96,
+        "total_quantity": 38
+      }
+    },
+    "食品": {
+      "2026-07-04": {
+        "order_count": 2,
+        "total_sales": 111.44,
+        "total_quantity": 6
+      },
+      "2026-07-05": {
+        "order_count": 10,
+        "total_sales": 514.14,
+        "total_quantity": 32
+      },
+      "2026-07-06": {
+        "order_count": 11,
+        "total_sales": 738.97,
+        "total_quantity": 32
+      },
+      "2026-07-07": {
+        "order_count": 9,
+        "total_sales": 500.01,
+        "total_quantity": 24
+      },
+      "2026-07-08": {
+        "order_count": 9,
+        "total_sales": 455.27,
+        "total_quantity": 25
+      },
+      "2026-07-09": {
+        "order_count": 7,
+        "total_sales": 530.12,
+        "total_quantity": 20
+      },
+      "2026-07-10": {
+        "order_count": 11,
+        "total_sales": 374.4,
+        "total_quantity": 46
+      }
+    }
+  },
+  "category_sales": [
+    {
+      "category": "电子产品",
+      "total_sales": 234969.88,
+      "order_count": 59
+    },
+    {
+      "category": "服装",
+      "total_sales": 27378.67,
+      "order_count": 66
+    },
+    {
+      "category": "家居",
+      "total_sales": 19721.72,
+      "order_count": 73
+    },
+    {
+      "category": "食品",
+      "total_sales": 3224.35,
+      "order_count": 59
+    }
+  ],
+  "top_products": [
+    {
+      "product_name": "手机",
+      "category": "电子产品",
+      "total_sales": 74330.54,
+      "total_quantity": 41
+    },
+    {
+      "product_name": "笔记本电脑",
+      "category": "电子产品",
+      "total_sales": 66436.08,
+      "total_quantity": 26
+    },
+    {
+      "product_name": "平板电脑",
+      "category": "电子产品",
+      "total_sales": 63306.2,
+      "total_quantity": 41
+    },
+    {
+      "product_name": "智能手表",
+      "category": "电子产品",
+      "total_sales": 21858.67,
+      "total_quantity": 40
+    },
+    {
+      "product_name": "外套",
+      "category": "服装",
+      "total_sales": 12286.34,
+      "total_quantity": 43
+    }
+  ],
+  "hourly_all": {
+    "8": 16,
+    "9": 10,
+    "10": 18,
+    "11": 12,
+    "12": 11,
+    "13": 16,
+    "14": 10,
+    "15": 18,
+    "16": 14,
+    "17": 26,
+    "18": 20,
+    "19": 23,
+    "20": 19,
+    "21": 11,
+    "22": 20,
+    "23": 13
+  },
+  "category_hourly": {
+    "家居": {
+      "8": 4,
+      "9": 1,
+      "10": 6,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 3,
+      "17": 7,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 5,
+      "22": 9,
+      "23": 4
+    },
+    "服装": {
+      "8": 1,
+      "9": 3,
+      "10": 6,
+      "11": 5,
+      "12": 3,
+      "13": 3,
+      "14": 3,
+      "15": 5,
+      "16": 3,
+      "17": 5,
+      "18": 4,
+      "19": 6,
+      "20": 8,
+      "21": 3,
+      "22": 7,
+      "23": 1
+    },
+    "电子产品": {
+      "8": 5,
+      "9": 1,
+      "10": 3,
+      "11": 2,
+      "12": 2,
+      "13": 3,
+      "14": 1,
+      "15": 5,
+      "16": 4,
+      "17": 9,
+      "18": 5,
+      "19": 8,
+      "20": 3,
+      "21": 2,
+      "22": 2,
+      "23": 4
+    },
+    "食品": {
+      "8": 6,
+      "9": 5,
+      "10": 3,
+      "11": 1,
+      "12": 2,
+      "13": 6,
+      "14": 2,
+      "15": 4,
+      "16": 4,
+      "17": 5,
+      "18": 5,
+      "19": 5,
+      "20": 4,
+      "21": 1,
+      "22": 2,
+      "23": 4
+    }
+  }
+}
