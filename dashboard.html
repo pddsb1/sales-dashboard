@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>销售数据看板</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-radius: 12px;
+            padding: 24px 32px;
+            margin-bottom: 20px;
+            border: 1px solid #c8e6c9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 24px; font-weight: 600; color: #2e7d32; }
+        .header .update-time { font-size: 14px; color: #666; }
+        .main-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .left-panel { display: flex; flex-direction: column; gap: 16px; }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e8f5e9;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .stat-card .label { font-size: 13px; color: #666; margin-bottom: 8px; }
+        .stat-card .value { font-size: 32px; font-weight: 700; color: #2e7d32; }
+        .stat-card .change { font-size: 12px; margin-top: 8px; color: #666; }
+        .change.up { color: #4caf50; }
+        .change.down { color: #f44336; }
+        .right-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e8f5e9;
+        }
+        .right-panel h3 {
+            font-size: 16px; color: #2e7d32; margin-bottom: 16px; font-weight: 600;
+        }
+        .chart { width: 100%; height: 350px; }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e8f5e9;
+        }
+        .chart-container h3 {
+            font-size: 16px; color: #2e7d32; margin-bottom: 20px; font-weight: 600;
+        }
+        .chart-container .chart { height: 280px; }
+        .filter-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-tag {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #c8e6c9;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .filter-tag:hover { background: #e8f5e9; }
+        .filter-tag.active {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+        .current-filter {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+        .loading { text-align: center; padding: 40px; color: #999; }
+        @media (max-width: 1024px) {
+            .main-content { grid-template-columns: 1fr; }
+            .charts-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 销售数据看板</h1>
+            <div class="update-time" id="updateTime">加载中...</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="stat-card">
+                    <div class="label">总销售额</div>
+                    <div class="value" id="statSales">--</div>
+                    <div class="change" id="statSalesChange">--</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">订单数</div>
+                    <div class="value" id="statOrders">--</div>
+                    <div class="change" id="statOrdersChange">--</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">客单价</div>
+                    <div class="value" id="statAvg">--</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">商品件数</div>
+                    <div class="value" id="statQuantity">--</div>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <h3>销售额趋势</h3>
+                <div class="filter-tags" id="filterTags">
+                    <span class="filter-tag active" data-category="全部">全部</span>
+                </div>
+                <div class="current-filter" id="currentFilter">当前筛选：全部</div>
+                <div id="salesTrendChart" class="chart"></div>
+            </div>
+        </div>
+        
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h3>订单量趋势</h3>
+                <div id="ordersTrendChart" class="chart"></div>
+            </div>
+            <div class="chart-container">
+                <h3>品类销售占比</h3>
+                <div id="categoryPieChart" class="chart"></div>
+            </div>
+            <div class="chart-container">
+                <h3>热销商品 Top 5</h3>
+                <div id="topProductsChart" class="chart"></div>
+            </div>
+            <div class="chart-container">
+                <h3>订单时段分布</h3>
+                <div id="hourlyChart" class="chart"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let rawData = null;
+        let currentCategory = '全部';
+        const allHours = Array.from({length: 24}, (_, i) => i);
+        
+        // 初始化图表
+        const salesTrendChart = echarts.init(document.getElementById('salesTrendChart'));
+        const ordersTrendChart = echarts.init(document.getElementById('ordersTrendChart'));
+        const categoryPieChart = echarts.init(document.getElementById('categoryPieChart'));
+        const topProductsChart = echarts.init(document.getElementById('topProductsChart'));
+        const hourlyChart = echarts.init(document.getElementById('hourlyChart'));
+        
+        // 加载数据
+        function loadData() {
+            fetch('./data.json?t=' + Date.now())
+                .then(res => res.json())
+                .then(data => {
+                    rawData = data;
+                    document.getElementById('updateTime').textContent = '🕒 数据更新：' + data.update_time;
+                    
+                    // 生成筛选标签
+                    const filterContainer = document.getElementById('filterTags');
+                    data.category_sales.forEach(cat => {
+                        const tag = document.createElement('span');
+                        tag.className = 'filter-tag';
+                        tag.dataset.category = cat.category;
+                        tag.textContent = cat.category;
+                        filterContainer.appendChild(tag);
+                    });
+                    
+                    renderAll('全部');
+                })
+                .catch(err => {
+                    console.error('加载数据失败:', err);
+                    document.getElementById('updateTime').textContent = '⚠️ 数据加载失败';
+                });
+        }
+        
+        function getCategoryDaily(category) {
+            if (category === '全部') {
+                return rawData.daily_all.map(d => ({
+                    sales: d.total_sales,
+                    orders: d.order_count,
+                    quantity: d.total_quantity,
+                    avg: d.avg_order_value
+                }));
+            }
+            return rawData.dates.map((dateShort, i) => {
+                const fullDate = rawData.full_dates[i];
+                const catData = rawData.category_daily[category];
+                const d = catData ? catData[fullDate] : null;
+                return {
+                    sales: d ? d.total_sales : 0,
+                    orders: d ? d.order_count : 0,
+                    quantity: d ? d.total_quantity : 0,
+                    avg: d && d.order_count > 0 ? d.total_sales / d.order_count : 0
+                };
+            });
+        }
+        
+        function getCategoryHourly(category) {
+            if (category === '全部') {
+                return allHours.map(h => rawData.hourly_all[String(h)] || 0);
+            }
+            const catData = rawData.category_hourly[category] || {};
+            return allHours.map(h => catData[String(h)] || 0);
+        }
+        
+        function getCategoryTopProducts(category) {
+            if (category === '全部') {
+                return rawData.top_products.slice(0, 5);
+            }
+            return rawData.top_products
+                .filter(p => p.category === category)
+                .slice(0, 5);
+        }
+        
+        function updateStatCards(category) {
+            const daily = getCategoryDaily(category);
+            const latest = daily[daily.length - 1] || {};
+            const prev = daily.length > 1 ? daily[daily.length - 2] : null;
+            
+            document.getElementById('statSales').textContent = '¥' + (latest.sales || 0).toLocaleString('zh-CN', {minimumFractionDigits: 2});
+            document.getElementById('statOrders').textContent = (latest.orders || 0).toString();
+            document.getElementById('statAvg').textContent = '¥' + (latest.avg || 0).toLocaleString('zh-CN', {minimumFractionDigits: 2});
+            document.getElementById('statQuantity').textContent = (latest.quantity || 0).toString();
+            
+            if (prev && prev.sales > 0) {
+                const change = ((latest.sales - prev.sales) / prev.sales * 100).toFixed(1);
+                const el = document.getElementById('statSalesChange');
+                el.textContent = (change >= 0 ? '↑' : '↓') + ' ' + Math.abs(change) + '% 环比';
+                el.className = 'change ' + (change >= 0 ? 'up' : 'down');
+            }
+            if (prev && prev.orders > 0) {
+                const change = ((latest.orders - prev.orders) / prev.orders * 100).toFixed(1);
+                const el = document.getElementById('statOrdersChange');
+                el.textContent = (change >= 0 ? '↑' : '↓') + ' ' + Math.abs(change) + '% 环比';
+                el.className = 'change ' + (change >= 0 ? 'up' : 'down');
+            }
+        }
+        
+        function renderSalesTrend(category) {
+            const daily = getCategoryDaily(category);
+            const sales = daily.map(d => d.sales);
+            salesTrendChart.setOption({
+                tooltip: {
+                    trigger: 'axis',
+                    backgroundColor: 'white',
+                    borderColor: '#e8f5e9',
+                    borderWidth: 1,
+                    textStyle: { color: '#333' },
+                    formatter: function(params) {
+                        return '<strong>' + params[0].name + '</strong><br/>销售额: <strong style="color:#4caf50">¥' + params[0].value.toLocaleString() + '</strong>';
+                    }
+                },
+                grid: { left: '3%', right: '4%', bottom: '8%', top: '10%', containLabel: true },
+                xAxis: {
+                    type: 'category',
+                    data: rawData.dates,
+                    axisLine: { lineStyle: { color: '#eee' } },
+                    axisLabel: { color: '#666', fontSize: 12 },
+                    axisTick: { show: false }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    splitLine: { lineStyle: { color: '#f5f5f5' } },
+                    axisLabel: { color: '#999', formatter: '¥{value}' }
+                },
+                series: [{
+                    data: sales,
+                    type: 'bar',
+                    barWidth: '50%',
+                    itemStyle: { color: '#81c784', borderRadius: [4, 4, 0, 0] },
+                    label: {
+                        show: true, position: 'top', color: '#666', fontSize: 11,
+                        formatter: function(p) { return '¥' + p.value; }
+                    }
+                }]
+            });
+        }
+        
+        function renderOrdersTrend(category) {
+            const daily = getCategoryDaily(category);
+            const orders = daily.map(d => d.orders);
+            ordersTrendChart.setOption({
+                tooltip: {
+                    trigger: 'axis', backgroundColor: 'white',
+                    borderColor: '#e8f5e9', borderWidth: 1, textStyle: { color: '#333' }
+                },
+                grid: { left: '3%', right: '4%', bottom: '8%', top: '10%', containLabel: true },
+                xAxis: {
+                    type: 'category', data: rawData.dates,
+                    axisLine: { lineStyle: { color: '#eee' } },
+                    axisLabel: { color: '#666', fontSize: 12 }, axisTick: { show: false }
+                },
+                yAxis: {
+                    type: 'value', axisLine: { show: false }, axisTick: { show: false },
+                    splitLine: { lineStyle: { color: '#f5f5f5' } },
+                    axisLabel: { color: '#999' }
+                },
+                series: [{
+                    data: orders, type: 'line', smooth: true, symbol: 'circle', symbolSize: 6,
+                    itemStyle: { color: '#4caf50' }, lineStyle: { color: '#4caf50', width: 2 },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(76, 175, 80, 0.2)' },
+                            { offset: 1, color: 'rgba(76, 175, 80, 0)' }
+                        ])
+                    }
+                }]
+            });
+        }
+        
+        function renderCategoryPie(highlightCategory) {
+            const pieData = rawData.category_sales.map(c => ({ name: c.category, value: c.total_sales }));
+            categoryPieChart.setOption({
+                tooltip: {
+                    trigger: 'item', backgroundColor: 'white',
+                    borderColor: '#e8f5e9', borderWidth: 1, textStyle: { color: '#333' },
+                    formatter: '{b}<br/>销售额: <strong>¥{c}</strong><br/>占比: <strong>{d}%</strong>'
+                },
+                legend: {
+                    orient: 'vertical', right: '5%', top: 'center',
+                    textStyle: { color: '#666', fontSize: 13 }
+                },
+                color: ['#81c784', '#66bb6a', '#4caf50', '#43a047', '#388e3c'],
+                series: [{
+                    type: 'pie', radius: ['45%', '75%'], center: ['35%', '50%'],
+                    avoidLabelOverlap: true,
+                    itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 2 },
+                    label: { show: false },
+                    emphasis: { label: { show: true, fontSize: 14, fontWeight: 'bold' } },
+                    selectedMode: 'single', selectedOffset: 10,
+                    data: pieData
+                }]
+            });
+            if (highlightCategory && highlightCategory !== '全部') {
+                const idx = pieData.findIndex(d => d.name === highlightCategory);
+                if (idx >= 0) {
+                    categoryPieChart.dispatchAction({ type: 'highlight', seriesIndex: 0, dataIndex: idx });
+                }
+            } else {
+                categoryPieChart.dispatchAction({ type: 'downplay', seriesIndex: 0 });
+            }
+        }
+        
+        function renderTopProducts(category) {
+            const products = getCategoryTopProducts(category);
+            const names = products.map(p => p.product_name);
+            const salesData = products.map(p => p.total_sales);
+            topProductsChart.setOption({
+                tooltip: {
+                    trigger: 'axis', axisPointer: { type: 'shadow' },
+                    backgroundColor: 'white', borderColor: '#e8f5e9',
+                    borderWidth: 1, textStyle: { color: '#333' }
+                },
+                grid: { left: '3%', right: '10%', bottom: '3%', top: '3%', containLabel: true },
+                xAxis: {
+                    type: 'value', axisLine: { show: false }, axisTick: { show: false },
+                    splitLine: { lineStyle: { color: '#f5f5f5' } },
+                    axisLabel: { color: '#999', formatter: '¥{value}' }
+                },
+                yAxis: {
+                    type: 'category', data: names.slice().reverse(),
+                    axisLine: { lineStyle: { color: '#eee' } },
+                    axisLabel: { color: '#666', fontSize: 13 }, axisTick: { show: false }
+                },
+                series: [{
+                    data: salesData.slice().reverse(), type: 'bar', barWidth: '50%',
+                    itemStyle: { color: '#81c784', borderRadius: [0, 4, 4, 0] },
+                    label: { show: true, position: 'right', color: '#666', formatter: '¥{c}' }
+                }]
+            });
+        }
+        
+        function renderHourlyChart(category) {
+            const hourlyData = getCategoryHourly(category);
+            const hours = allHours.map(h => h + ':00');
+            hourlyChart.setOption({
+                tooltip: {
+                    trigger: 'axis', backgroundColor: 'white',
+                    borderColor: '#e8f5e9', borderWidth: 1, textStyle: { color: '#333' }
+                },
+                grid: { left: '3%', right: '4%', bottom: '8%', top: '10%', containLabel: true },
+                xAxis: {
+                    type: 'category', data: hours,
+                    axisLine: { lineStyle: { color: '#eee' } },
+                    axisLabel: { color: '#666', fontSize: 11 }, axisTick: { show: false }
+                },
+                yAxis: {
+                    type: 'value', axisLine: { show: false }, axisTick: { show: false },
+                    splitLine: { lineStyle: { color: '#f5f5f5' } },
+                    axisLabel: { color: '#999' }
+                },
+                series: [{
+                    data: hourlyData, type: 'line', smooth: true,
+                    symbol: 'circle', symbolSize: 6,
+                    itemStyle: { color: '#66bb6a' },
+                    lineStyle: { color: '#66bb6a', width: 2 }
+                }]
+            });
+        }
+        
+        function renderAll(category) {
+            currentCategory = category;
+            updateStatCards(category);
+            renderSalesTrend(category);
+            renderOrdersTrend(category);
+            renderCategoryPie(category);
+            renderTopProducts(category);
+            renderHourlyChart(category);
+            document.getElementById('currentFilter').textContent = '当前筛选：' + category;
+        }
+        
+        // 筛选交互
+        document.getElementById('filterTags').addEventListener('click', function(e) {
+            const tag = e.target.closest('.filter-tag');
+            if (!tag) return;
+            document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+            renderAll(tag.dataset.category);
+        });
+        
+        // 响应式
+        window.addEventListener('resize', function() {
+            salesTrendChart.resize();
+            ordersTrendChart.resize();
+            categoryPieChart.resize();
+            topProductsChart.resize();
+            hourlyChart.resize();
+        });
+        
+        // 启动
+        loadData();
+    </script>
+</body>
+</html>
