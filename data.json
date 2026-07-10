@@ -1,0 +1,375 @@
+{
+  "update_time": "2026-07-10 16:25:24",
+  "dates": [
+    "07-04",
+    "07-05",
+    "07-06",
+    "07-07",
+    "07-08",
+    "07-09",
+    "07-10"
+  ],
+  "full_dates": [
+    "2026-07-04",
+    "2026-07-05",
+    "2026-07-06",
+    "2026-07-07",
+    "2026-07-08",
+    "2026-07-09",
+    "2026-07-10"
+  ],
+  "daily_all": [
+    {
+      "date": "2026-07-10",
+      "date_short": "07-10",
+      "order_count": 45,
+      "total_sales": 75683.01,
+      "total_quantity": 144,
+      "avg_order_value": 1681.84
+    },
+    {
+      "date": "2026-07-09",
+      "date_short": "07-09",
+      "order_count": 31,
+      "total_sales": 50416.59,
+      "total_quantity": 96,
+      "avg_order_value": 1626.34
+    },
+    {
+      "date": "2026-07-08",
+      "date_short": "07-08",
+      "order_count": 43,
+      "total_sales": 76423.52,
+      "total_quantity": 126,
+      "avg_order_value": 1777.29
+    },
+    {
+      "date": "2026-07-07",
+      "date_short": "07-07",
+      "order_count": 34,
+      "total_sales": 51991.52,
+      "total_quantity": 96,
+      "avg_order_value": 1529.16
+    },
+    {
+      "date": "2026-07-06",
+      "date_short": "07-06",
+      "order_count": 48,
+      "total_sales": 75110.93,
+      "total_quantity": 139,
+      "avg_order_value": 1564.81
+    },
+    {
+      "date": "2026-07-05",
+      "date_short": "07-05",
+      "order_count": 44,
+      "total_sales": 94706.92,
+      "total_quantity": 123,
+      "avg_order_value": 2152.43
+    },
+    {
+      "date": "2026-07-04",
+      "date_short": "07-04",
+      "order_count": 45,
+      "total_sales": 63904.52,
+      "total_quantity": 149,
+      "avg_order_value": 1420.1
+    }
+  ],
+  "category_daily": {
+    "家居": {
+      "2026-07-04": {
+        "order_count": 12,
+        "total_sales": 3454.28,
+        "total_quantity": 38
+      },
+      "2026-07-05": {
+        "order_count": 5,
+        "total_sales": 1167.93,
+        "total_quantity": 11
+      },
+      "2026-07-06": {
+        "order_count": 9,
+        "total_sales": 3053.45,
+        "total_quantity": 32
+      },
+      "2026-07-07": {
+        "order_count": 5,
+        "total_sales": 1440.26,
+        "total_quantity": 13
+      },
+      "2026-07-08": {
+        "order_count": 12,
+        "total_sales": 4136.67,
+        "total_quantity": 29
+      },
+      "2026-07-09": {
+        "order_count": 9,
+        "total_sales": 2696.24,
+        "total_quantity": 33
+      },
+      "2026-07-10": {
+        "order_count": 10,
+        "total_sales": 3309.24,
+        "total_quantity": 25
+      }
+    },
+    "服装": {
+      "2026-07-04": {
+        "order_count": 10,
+        "total_sales": 3787.37,
+        "total_quantity": 39
+      },
+      "2026-07-05": {
+        "order_count": 10,
+        "total_sales": 5200.23,
+        "total_quantity": 28
+      },
+      "2026-07-06": {
+        "order_count": 12,
+        "total_sales": 6692.21,
+        "total_quantity": 33
+      },
+      "2026-07-07": {
+        "order_count": 6,
+        "total_sales": 1974.98,
+        "total_quantity": 21
+      },
+      "2026-07-08": {
+        "order_count": 12,
+        "total_sales": 5518.09,
+        "total_quantity": 41
+      },
+      "2026-07-09": {
+        "order_count": 9,
+        "total_sales": 4036.71,
+        "total_quantity": 25
+      },
+      "2026-07-10": {
+        "order_count": 11,
+        "total_sales": 5906.5,
+        "total_quantity": 37
+      }
+    },
+    "电子产品": {
+      "2026-07-04": {
+        "order_count": 11,
+        "total_sales": 54374.18,
+        "total_quantity": 40
+      },
+      "2026-07-05": {
+        "order_count": 16,
+        "total_sales": 86344.09,
+        "total_quantity": 47
+      },
+      "2026-07-06": {
+        "order_count": 13,
+        "total_sales": 62654.42,
+        "total_quantity": 38
+      },
+      "2026-07-07": {
+        "order_count": 9,
+        "total_sales": 46482.74,
+        "total_quantity": 21
+      },
+      "2026-07-08": {
+        "order_count": 10,
+        "total_sales": 65134.55,
+        "total_quantity": 33
+      },
+      "2026-07-09": {
+        "order_count": 7,
+        "total_sales": 42610.92,
+        "total_quantity": 24
+      },
+      "2026-07-10": {
+        "order_count": 14,
+        "total_sales": 65030.79,
+        "total_quantity": 47
+      }
+    },
+    "食品": {
+      "2026-07-04": {
+        "order_count": 12,
+        "total_sales": 2288.69,
+        "total_quantity": 32
+      },
+      "2026-07-05": {
+        "order_count": 13,
+        "total_sales": 1994.67,
+        "total_quantity": 37
+      },
+      "2026-07-06": {
+        "order_count": 14,
+        "total_sales": 2710.85,
+        "total_quantity": 36
+      },
+      "2026-07-07": {
+        "order_count": 14,
+        "total_sales": 2093.54,
+        "total_quantity": 41
+      },
+      "2026-07-08": {
+        "order_count": 9,
+        "total_sales": 1634.21,
+        "total_quantity": 23
+      },
+      "2026-07-09": {
+        "order_count": 6,
+        "total_sales": 1072.72,
+        "total_quantity": 14
+      },
+      "2026-07-10": {
+        "order_count": 10,
+        "total_sales": 1436.48,
+        "total_quantity": 35
+      }
+    }
+  },
+  "category_sales": [
+    {
+      "category": "电子产品",
+      "total_sales": 422631.69,
+      "order_count": 80
+    },
+    {
+      "category": "服装",
+      "total_sales": 33116.09,
+      "order_count": 70
+    },
+    {
+      "category": "家居",
+      "total_sales": 19258.07,
+      "order_count": 62
+    },
+    {
+      "category": "食品",
+      "total_sales": 13231.16,
+      "order_count": 78
+    }
+  ],
+  "top_products": [
+    {
+      "product_name": "笔记本电脑",
+      "category": "电子产品",
+      "total_sales": 100535.77,
+      "total_quantity": 57
+    },
+    {
+      "product_name": "平板电脑",
+      "category": "电子产品",
+      "total_sales": 98404.99,
+      "total_quantity": 59
+    },
+    {
+      "product_name": "耳机",
+      "category": "电子产品",
+      "total_sales": 82262.22,
+      "total_quantity": 45
+    },
+    {
+      "product_name": "手机",
+      "category": "电子产品",
+      "total_sales": 74194.17,
+      "total_quantity": 38
+    },
+    {
+      "product_name": "智能手表",
+      "category": "电子产品",
+      "total_sales": 67234.54,
+      "total_quantity": 51
+    }
+  ],
+  "hourly_all": {
+    "8": 23,
+    "9": 15,
+    "10": 18,
+    "11": 18,
+    "12": 14,
+    "13": 27,
+    "14": 23,
+    "15": 16,
+    "16": 13,
+    "17": 15,
+    "18": 12,
+    "19": 17,
+    "20": 17,
+    "21": 31,
+    "22": 13,
+    "23": 18
+  },
+  "category_hourly": {
+    "家居": {
+      "8": 4,
+      "9": 2,
+      "10": 3,
+      "11": 5,
+      "12": 3,
+      "13": 3,
+      "14": 6,
+      "15": 3,
+      "16": 2,
+      "17": 5,
+      "18": 4,
+      "19": 3,
+      "20": 4,
+      "21": 6,
+      "22": 1,
+      "23": 8
+    },
+    "服装": {
+      "8": 7,
+      "9": 3,
+      "10": 6,
+      "11": 3,
+      "12": 4,
+      "13": 7,
+      "14": 5,
+      "15": 1,
+      "16": 5,
+      "17": 3,
+      "18": 2,
+      "19": 4,
+      "20": 6,
+      "21": 11,
+      "22": 1,
+      "23": 2
+    },
+    "电子产品": {
+      "8": 6,
+      "9": 4,
+      "10": 5,
+      "11": 7,
+      "12": 2,
+      "13": 9,
+      "14": 6,
+      "15": 7,
+      "16": 5,
+      "17": 3,
+      "18": 3,
+      "19": 4,
+      "20": 3,
+      "21": 9,
+      "22": 5,
+      "23": 2
+    },
+    "食品": {
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 3,
+      "12": 5,
+      "13": 8,
+      "14": 6,
+      "15": 5,
+      "16": 1,
+      "17": 4,
+      "18": 3,
+      "19": 6,
+      "20": 4,
+      "21": 5,
+      "22": 6,
+      "23": 6
+    }
+  }
+}
