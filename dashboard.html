@@ -2,6 +2,9 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>整车用户反馈数据看板</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -70,25 +73,25 @@
 
   /* Local filter for wordcloud & vehicle bar */
   .local-filter-bar {
-    display:flex; align-items:center; flex-wrap:nowrap; gap:0; margin-bottom:12px;
-    background:#fff; border:1px solid #e8efe8; border-radius:8px; padding:12px 16px;
-    overflow-x:auto;
+    display:flex !important; align-items:center !important; flex-wrap:nowrap !important; gap:0 !important; margin-bottom:12px;
+    background:#fff !important; border:1px solid #e8efe8 !important; border-radius:8px !important; padding:12px 16px !important;
+    overflow-x:auto !important;
   }
   .local-filter-bar .filter-label {
-    font-size:14px; color:#333; font-weight:600; margin-right:12px; white-space:nowrap;
-    min-width:40px;
+    font-size:14px !important; color:#333 !important; font-weight:600 !important; margin-right:12px !important; white-space:nowrap !important;
+    min-width:40px !important;
   }
-  .local-filter-bar .filter-btn {
-    padding:5px 16px; background:#fff; color:#555; border:1px solid #d9d9d9;
-    border-radius:4px; font-size:13px; cursor:pointer; transition:all .15s;
-    white-space:nowrap; margin-right:6px; line-height:1.5;
-    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  button.filter-btn {
+    padding:5px 16px !important; background:#fff !important; color:#555 !important; border:1px solid #d9d9d9 !important;
+    border-radius:4px !important; font-size:13px !important; cursor:pointer !important; transition:all .15s !important;
+    white-space:nowrap !important; margin-right:6px !important; line-height:1.5 !important;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif !important;
   }
-  .local-filter-bar .filter-btn:hover {
-    border-color:#2d9a5f; color:#2d9a5f;
+  button.filter-btn:hover {
+    border-color:#2d9a5f !important; color:#2d9a5f !important;
   }
-  .local-filter-bar .filter-btn.active {
-    background:#2d9a5f; color:#fff; border-color:#2d9a5f;
+  button.filter-btn.active {
+    background:#2d9a5f !important; color:#fff !important; border-color:#2d9a5f !important;
   }
   .local-filter-group {
     display:flex; align-items:center; flex-wrap:nowrap; overflow-x:auto;
@@ -213,7 +216,7 @@
   var selectedYears = [];   // empty = all
 
   function loadData() {
-    fetch('data.json')
+    fetch('data.json?v=' + Date.now())
       .then(function(resp) { return resp.json(); })
       .then(function(data) {
         rawData = data;
