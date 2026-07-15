@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>整车用户反馈数据看板</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.min.js"></script>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background:#f0f5f0; color:#333; min-height:100vh; }
@@ -61,10 +62,29 @@
   .chart-wrapper-bar { height:400px; }
   .chart-wrapper-line { height:350px; }
   .chart-wrapper-pie { height:350px; max-width:500px; margin:0 auto; }
+  .chart-wrapper-wordcloud { height:320px; display:flex; align-items:center; justify-content:center; }
 
   .charts-row {
     display:grid; grid-template-columns: 3fr 2fr; gap:24px; margin-bottom:24px;
   }
+
+  /* Local filter for wordcloud & vehicle bar */
+  .local-filter-bar {
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; align-items:center;
+  }
+  .local-filter-bar .filter-label {
+    font-size:13px; color:#666; font-weight:500; margin-right:4px;
+  }
+  .local-filter-bar .filter-btn {
+    padding:4px 12px; background:#f5f9f5; color:#555; border:1px solid #d8e8d8;
+    border-radius:14px; font-size:12px; cursor:pointer; transition:all .2s;
+    white-space:nowrap;
+  }
+  .local-filter-bar .filter-btn:hover { border-color:#2d9a5f; color:#2d9a5f; }
+  .local-filter-bar .filter-btn.active {
+    background:#2d9a5f; color:#fff; border-color:#2d9a5f;
+  }
+  .local-filter-group { margin-bottom:10px; }
 
   .footer { text-align:center; padding:20px; color:#bbb; font-size:12px; }
 
@@ -132,6 +152,32 @@
       </div>
     </div>
   </div>
+
+  <!-- New section: Word Cloud + Vehicle Stacked Bar with local filters -->
+  <div class="chart-section">
+    <div class="chart-title">🏷️ 一级问题分类分布</div>
+    <div class="local-filter-group" id="modelFilterGroup">
+      <span class="filter-label">车型：</span>
+      <span id="modelFilterBtns"></span>
+    </div>
+    <div class="local-filter-group" id="yearFilterGroup">
+      <span class="filter-label">年款：</span>
+      <span id="yearFilterBtns"></span>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-top:12px;">
+      <div>
+        <div class="chart-wrapper chart-wrapper-wordcloud">
+          <canvas id="wordCloudCanvas" width="500" height="300"></canvas>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;color:#888;margin-bottom:8px;font-weight:500;">各车型反馈数量（按情感色彩堆叠）</div>
+        <div class="chart-wrapper" style="height:300px;">
+          <canvas id="vehicleBarChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="footer">整车用户反馈数据看板 · 数据每日更新（T+1）</div>
@@ -142,16 +188,21 @@
   var trendChart = null;
   var negRateChart = null;
   var identityChart = null;
+  var vehicleBarChart = null;
+  var wordCloudInstance = null;
 
   var COLORS = [
     '#2d9a5f','#4db87c','#7bc99b','#a8dbb9','#d4eed9',
     '#1a7a4c','#e8a838','#5b8def','#e85b5b','#9b6dd7','#c8c8c8'
   ];
-
   var PIE_COLORS = ['#2d9a5f','#4db87c','#e8a838','#a8dbb9'];
+  var SENTIMENT_COLORS = { '负向':'#e85b5b', '中性':'#4db87c', '正向':'#5b8def', '未知':'#c8c8c8', '':'#ddd' };
 
-  // Current nrIndices for tooltip
   var currentNrIndices = [];
+
+  // Local filter state
+  var selectedModels = [];  // empty = all
+  var selectedYears = [];   // empty = all
 
   function loadData() {
     fetch('data.json')
@@ -161,11 +212,255 @@
         document.getElementById('updateTime').textContent = new Date().toLocaleDateString('zh-CN');
         document.getElementById('startDate').value = rawData.summary.date_range[0];
         document.getElementById('endDate').value = rawData.summary.date_range[1];
+        buildLocalFilters();
         renderAll(rawData.summary.date_range[0], rawData.summary.date_range[1]);
       })
-      .catch(function(err) {
-        console.error('Failed to load data:', err);
+      .catch(function(err) { console.error('Failed to load data:', err); });
+  }
+
+  // Build model and year filter buttons
+  function buildLocalFilters() {
+    var models = rawData.filter_models || [];
+    var years = rawData.filter_years || [];
+
+    var modelContainer = document.getElementById('modelFilterBtns');
+    var yearContainer = document.getElementById('yearFilterBtns');
+
+    // Add "All" button for models
+    var allModelBtn = document.createElement('button');
+    allModelBtn.className = 'filter-btn active';
+    allModelBtn.textContent = '全部';
+    allModelBtn.setAttribute('data-value', '__all__');
+    allModelBtn.onclick = function() { toggleModelFilter('__all__', this); };
+    modelContainer.appendChild(allModelBtn);
+
+    for (var i = 0; i < models.length; i++) {
+      var btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.textContent = models[i];
+      btn.setAttribute('data-value', models[i]);
+      btn.onclick = function() { toggleModelFilter(this.getAttribute('data-value'), this); };
+      modelContainer.appendChild(btn);
+    }
+
+    // Add "All" button for years
+    var allYearBtn = document.createElement('button');
+    allYearBtn.className = 'filter-btn active';
+    allYearBtn.textContent = '全部';
+    allYearBtn.setAttribute('data-value', '__all__');
+    allYearBtn.onclick = function() { toggleYearFilter('__all__', this); };
+    yearContainer.appendChild(allYearBtn);
+
+    for (var j = 0; j < years.length; j++) {
+      var ybtn = document.createElement('button');
+      ybtn.className = 'filter-btn';
+      ybtn.textContent = years[j];
+      ybtn.setAttribute('data-value', years[j]);
+      ybtn.onclick = function() { toggleYearFilter(this.getAttribute('data-value'), this); };
+      yearContainer.appendChild(ybtn);
+    }
+  }
+
+  function toggleModelFilter(value, btn) {
+    if (value === '__all__') {
+      selectedModels = [];
+      var btns = document.querySelectorAll('#modelFilterBtns .filter-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      btn.classList.add('active');
+    } else {
+      // Remove "all" active state
+      var allBtn = document.querySelector('#modelFilterBtns .filter-btn[data-value="__all__"]');
+      if (allBtn) allBtn.classList.remove('active');
+
+      var idx = selectedModels.indexOf(value);
+      if (idx >= 0) {
+        selectedModels.splice(idx, 1);
+        btn.classList.remove('active');
+      } else {
+        selectedModels.push(value);
+        btn.classList.add('active');
+      }
+      // If nothing selected, re-activate "all"
+      if (selectedModels.length === 0) {
+        if (allBtn) allBtn.classList.add('active');
+      }
+    }
+    renderLocalCharts();
+  }
+
+  function toggleYearFilter(value, btn) {
+    if (value === '__all__') {
+      selectedYears = [];
+      var btns = document.querySelectorAll('#yearFilterBtns .filter-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      btn.classList.add('active');
+    } else {
+      var allBtn = document.querySelector('#yearFilterBtns .filter-btn[data-value="__all__"]');
+      if (allBtn) allBtn.classList.remove('active');
+
+      var idx = selectedYears.indexOf(value);
+      if (idx >= 0) {
+        selectedYears.splice(idx, 1);
+        btn.classList.remove('active');
+      } else {
+        selectedYears.push(value);
+        btn.classList.add('active');
+      }
+      if (selectedYears.length === 0) {
+        if (allBtn) allBtn.classList.add('active');
+      }
+    }
+    renderLocalCharts();
+  }
+
+  function getFilteredCrossData() {
+    var crossData = rawData.cross_data || [];
+    var filtered = [];
+    for (var i = 0; i < crossData.length; i++) {
+      var row = crossData[i];
+      var model = row[0], year = row[1], cat = row[2], sent = row[3], cnt = row[4];
+      if (selectedModels.length > 0 && selectedModels.indexOf(model) < 0) continue;
+      if (selectedYears.length > 0 && selectedYears.indexOf(year) < 0) continue;
+      filtered.push(row);
+    }
+    return filtered;
+  }
+
+  function renderLocalCharts() {
+    var filtered = getFilteredCrossData();
+
+    // Aggregate for word cloud: category -> count
+    var catMap = {};
+    for (var i = 0; i < filtered.length; i++) {
+      var cat = filtered[i][2];
+      catMap[cat] = (catMap[cat] || 0) + filtered[i][4];
+    }
+    var wordList = [];
+    for (var c in catMap) {
+      wordList.push([c, catMap[c]]);
+    }
+    wordList.sort(function(a, b) { return b[1] - a[1]; });
+
+    // Render word cloud
+    renderWordCloud(wordList);
+
+    // Aggregate for vehicle bar: model -> { sentiment -> count }
+    var modelSentMap = {};
+    var sentimentSet = {};
+    for (var j = 0; j < filtered.length; j++) {
+      var m = filtered[j][0], s = filtered[j][3], cnt2 = filtered[j][4];
+      if (!modelSentMap[m]) modelSentMap[m] = {};
+      modelSentMap[m][s] = (modelSentMap[m][s] || 0) + cnt2;
+      sentimentSet[s] = true;
+    }
+    var sentiments = Object.keys(sentimentSet).sort();
+    var modelNames = Object.keys(modelSentMap).sort(function(a, b) {
+      var totalA = 0, totalB = 0;
+      for (var k in modelSentMap[a]) totalA += modelSentMap[a][k];
+      for (var k in modelSentMap[b]) totalB += modelSentMap[b][k];
+      return totalB - totalA;
+    });
+
+    // Build datasets
+    var barDatasets = [];
+    for (var si = 0; si < sentiments.length; si++) {
+      var sent = sentiments[si];
+      var dataArr = [];
+      for (var mi = 0; mi < modelNames.length; mi++) {
+        dataArr.push(modelSentMap[modelNames[mi]][sent] || 0);
+      }
+      barDatasets.push({
+        label: sent || '未知',
+        data: dataArr,
+        backgroundColor: SENTIMENT_COLORS[sent] || '#ccc',
+        borderWidth: 0,
+        barPercentage: 0.7,
+        categoryPercentage: 0.85
       });
+    }
+
+    // Render vehicle bar chart
+    if (vehicleBarChart) vehicleBarChart.destroy();
+    var ctx = document.getElementById('vehicleBarChart').getContext('2d');
+    vehicleBarChart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: modelNames, datasets: barDatasets },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { padding: 10, usePointStyle: true, pointStyle: 'rectRounded', font: { size: 11 } }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(255,255,255,0.95)',
+            titleColor: '#333', bodyColor: '#555',
+            borderColor: '#ddd', borderWidth: 1,
+            callbacks: {
+              footer: function(items) {
+                var total = 0;
+                for (var t = 0; t < items.length; t++) total += items[t].parsed.x;
+                return '合计: ' + total.toLocaleString();
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            ticks: { font: { size: 10 }, callback: function(v) { return v.toLocaleString(); } },
+            grid: { color: '#f0f0f0' },
+            title: { display: true, text: '反馈数量', font: { size: 11 }, color: '#999' }
+          },
+          y: {
+            stacked: true,
+            ticks: { font: { size: 11 } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  }
+
+  function renderWordCloud(wordList) {
+    var canvas = document.getElementById('wordCloudCanvas');
+    if (!canvas || wordList.length === 0) return;
+
+    // Calculate font sizes based on counts
+    var maxCount = wordList[0][1];
+    var minCount = wordList[wordList.length - 1][1];
+    var minFontSize = 12;
+    var maxFontSize = 60;
+
+    var list = [];
+    for (var i = 0; i < wordList.length; i++) {
+      var ratio = (wordList[i][1] - minCount) / (maxCount - minCount || 1);
+      var fontSize = Math.round(minFontSize + ratio * (maxFontSize - minFontSize));
+      list.push([wordList[i][0], fontSize]);
+    }
+
+    var wcColors = [
+      '#1a7a4c', '#2d9a5f', '#4db87c', '#3ab06a', '#7bc99b',
+      '#e8a838', '#5b8def', '#9b6dd7', '#e85b5b'
+    ];
+
+    WordCloud(canvas, {
+      list: list,
+      gridSize: 8,
+      weightFactor: 1,
+      fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif',
+      color: function() {
+        return wcColors[Math.floor(Math.random() * wcColors.length)];
+      },
+      backgroundColor: '#fff',
+      rotateRatio: 0.3,
+      rotationSteps: 2,
+      shuffle: true,
+      drawOutOfBound: false
+    });
   }
 
   function renderAll(start, end) {
@@ -178,7 +473,6 @@
         if (labels[i] >= start && labels[i] <= end) indices.push(i);
       }
 
-      // Calculate totals
       var totalFb = 0;
       var filteredLabels = [];
       var filteredDatasets = [];
@@ -206,7 +500,6 @@
       document.getElementById('totalFeedbackSub').textContent = start + ' 至 ' + end;
       document.getElementById('uniqueUsersSub').textContent = '去重用户数（估算）';
 
-      // === Stacked Bar Chart ===
       var barDatasets = [];
       for (var bi = 0; bi < filteredDatasets.length; bi++) {
         barDatasets.push({
@@ -224,61 +517,34 @@
         type: 'bar',
         data: { labels: filteredLabels, datasets: barDatasets },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
+          responsive: true, maintainAspectRatio: false,
           interaction: { mode: 'index', intersect: false },
           plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { padding: 12, usePointStyle: true, pointStyle: 'rectRounded', font: { size: 11 } }
-            },
+            legend: { position: 'bottom', labels: { padding: 12, usePointStyle: true, pointStyle: 'rectRounded', font: { size: 11 } } },
             tooltip: {
-              backgroundColor: 'rgba(255,255,255,0.95)',
-              titleColor: '#333',
-              bodyColor: '#555',
-              borderColor: '#ddd',
-              borderWidth: 1,
-              callbacks: {
-                footer: function(items) {
-                  var total = 0;
-                  for (var t = 0; t < items.length; t++) total += items[t].parsed.y;
-                  return '合计: ' + total.toLocaleString();
-                }
-              }
+              backgroundColor: 'rgba(255,255,255,0.95)', titleColor: '#333', bodyColor: '#555',
+              borderColor: '#ddd', borderWidth: 1,
+              callbacks: { footer: function(items) { var t=0; for(var x=0;x<items.length;x++) t+=items[x].parsed.y; return '合计: '+t.toLocaleString(); } }
             }
           },
           scales: {
-            x: {
-              stacked: true,
-              ticks: { maxRotation: 45, font: { size: 10 }, maxTicksLimit: 30 },
-              grid: { display: false }
-            },
-            y: {
-              stacked: true,
-              ticks: { font: { size: 11 }, callback: function(v) { return v.toLocaleString(); } },
-              grid: { color: '#f0f0f0' },
-              title: { display: true, text: '反馈数量', font: { size: 12 }, color: '#999' }
-            }
+            x: { stacked: true, ticks: { maxRotation: 45, font: { size: 10 }, maxTicksLimit: 30 }, grid: { display: false } },
+            y: { stacked: true, ticks: { font: { size: 11 }, callback: function(v) { return v.toLocaleString(); } }, grid: { color: '#f0f0f0' },
+                 title: { display: true, text: '反馈数量', font: { size: 12 }, color: '#999' } }
           }
         }
       });
-    } catch (e) {
-      console.error('Error rendering stacked bar chart:', e);
-    }
+    } catch (e) { console.error('Error rendering stacked bar chart:', e); }
 
-    // === Negative Rate Line Chart (独立于全局筛选，固定展示2026-01起) ===
+    // === Negative Rate Line Chart ===
     try {
       var nr = rawData.negative_rate;
       currentNrIndices = [];
       var fixedStartMonth = '2026-01';
       for (var ni = 0; ni < nr.labels.length; ni++) {
-        if (nr.labels[ni] >= fixedStartMonth) {
-          currentNrIndices.push(ni);
-        }
+        if (nr.labels[ni] >= fixedStartMonth) currentNrIndices.push(ni);
       }
-
-      var nrLabels = [];
-      var nrData = [];
+      var nrLabels = [], nrData = [];
       for (var nj = 0; nj < currentNrIndices.length; nj++) {
         nrLabels.push(nr.labels[currentNrIndices[nj]]);
         nrData.push(nr.data[currentNrIndices[nj]]);
@@ -287,105 +553,47 @@
       if (negRateChart) negRateChart.destroy();
       negRateChart = new Chart(document.getElementById('negRateChart').getContext('2d'), {
         type: 'line',
-        data: {
-          labels: nrLabels,
-          datasets: [{
-            label: '负面率 (%)',
-            data: nrData,
-            borderColor: '#e85b5b',
-            backgroundColor: 'rgba(232,91,91,0.08)',
-            fill: true,
-            tension: 0.35,
-            pointRadius: 5,
-            pointHoverRadius: 7,
-            pointBackgroundColor: '#e85b5b',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-            borderWidth: 2.5
-          }]
-        },
+        data: { labels: nrLabels, datasets: [{ label: '负面率 (%)', data: nrData, borderColor: '#e85b5b', backgroundColor: 'rgba(232,91,91,0.08)', fill: true, tension: 0.35, pointRadius: 5, pointHoverRadius: 7, pointBackgroundColor: '#e85b5b', pointBorderColor: '#fff', pointBorderWidth: 2, borderWidth: 2.5 }] },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
+          responsive: true, maintainAspectRatio: false,
           plugins: {
             legend: { display: false },
             tooltip: {
-              backgroundColor: 'rgba(255,255,255,0.95)',
-              titleColor: '#333',
-              bodyColor: '#555',
-              borderColor: '#ddd',
-              borderWidth: 1,
+              backgroundColor: 'rgba(255,255,255,0.95)', titleColor: '#333', bodyColor: '#555', borderColor: '#ddd', borderWidth: 1,
               callbacks: {
-                label: function(ctx) {
-                  return '负面率: ' + ctx.parsed.y + '%';
-                },
-                afterLabel: function(ctx) {
-                  var idx = currentNrIndices[ctx.dataIndex];
-                  return '负向: ' + nr.negative[idx] + ' / 总计: ' + nr.total[idx];
-                }
+                label: function(ctx) { return '负面率: ' + ctx.parsed.y + '%'; },
+                afterLabel: function(ctx) { var idx = currentNrIndices[ctx.dataIndex]; return '负向: ' + nr.negative[idx] + ' / 总计: ' + nr.total[idx]; }
               }
             }
           },
           scales: {
-            x: {
-              grid: { display: false },
-              ticks: { font: { size: 11 } }
-            },
-            y: {
-              ticks: { font: { size: 11 }, callback: function(v) { return v + '%'; } },
-              grid: { color: '#f0f0f0' },
-              title: { display: true, text: '负面率', font: { size: 12 }, color: '#999' },
-              beginAtZero: true
-            }
+            x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+            y: { ticks: { font: { size: 11 }, callback: function(v) { return v + '%'; } }, grid: { color: '#f0f0f0' },
+                 title: { display: true, text: '负面率', font: { size: 12 }, color: '#999' }, beginAtZero: true }
           }
         }
       });
-    } catch (e) {
-      console.error('Error rendering negative rate chart:', e);
-    }
+    } catch (e) { console.error('Error rendering negative rate chart:', e); }
 
     // === Identity Pie Chart ===
     try {
       var id = rawData.identity;
-      var idLabels = [];
-      var idValues = [];
-      for (var mi = 0; mi < id.length; mi++) {
-        idLabels.push(id[mi].name);
-        idValues.push(id[mi].value);
-      }
+      var idLabels = [], idValues = [];
+      for (var mi = 0; mi < id.length; mi++) { idLabels.push(id[mi].name); idValues.push(id[mi].value); }
 
       if (identityChart) identityChart.destroy();
       identityChart = new Chart(document.getElementById('identityChart').getContext('2d'), {
         type: 'doughnut',
-        data: {
-          labels: idLabels,
-          datasets: [{
-            data: idValues,
-            backgroundColor: PIE_COLORS,
-            borderColor: '#fff',
-            borderWidth: 3,
-            hoverOffset: 8
-          }]
-        },
+        data: { labels: idLabels, datasets: [{ data: idValues, backgroundColor: PIE_COLORS, borderColor: '#fff', borderWidth: 3, hoverOffset: 8 }] },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          cutout: '52%',
+          responsive: true, maintainAspectRatio: false, cutout: '52%',
           plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 12 } }
-            },
+            legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 12 } } },
             tooltip: {
-              backgroundColor: 'rgba(255,255,255,0.95)',
-              titleColor: '#333',
-              bodyColor: '#555',
-              borderColor: '#ddd',
-              borderWidth: 1,
+              backgroundColor: 'rgba(255,255,255,0.95)', titleColor: '#333', bodyColor: '#555', borderColor: '#ddd', borderWidth: 1,
               callbacks: {
                 label: function(ctx) {
-                  var total = 0;
-                  for (var ti = 0; ti < ctx.dataset.data.length; ti++) total += ctx.dataset.data[ti];
+                  var total = 0; for (var ti = 0; ti < ctx.dataset.data.length; ti++) total += ctx.dataset.data[ti];
                   var pct = (ctx.parsed / total * 100).toFixed(1);
                   return ' ' + ctx.label + ': ' + ctx.parsed.toLocaleString() + ' (' + pct + '%)';
                 }
@@ -394,9 +602,10 @@
           }
         }
       });
-    } catch (e) {
-      console.error('Error rendering identity chart:', e);
-    }
+    } catch (e) { console.error('Error rendering identity chart:', e); }
+
+    // === Render local charts (word cloud + vehicle bar) ===
+    renderLocalCharts();
   }
 
   window.applyFilter = function() {
@@ -435,7 +644,6 @@
     }
   };
 
-  // Initialize
   loadData();
 })();
 </script>
