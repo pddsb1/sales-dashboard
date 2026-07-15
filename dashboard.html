@@ -66,6 +66,8 @@
   .chart-wrapper-line { height:350px; }
   .chart-wrapper-pie { height:350px; max-width:500px; margin:0 auto; }
   .chart-wrapper-wordcloud { height:320px; display:flex; align-items:center; justify-content:center; }
+  .chart-wrapper-lifecycle { height:380px; }
+  .chart-wrapper-radar { height:380px; max-width:500px; margin:0 auto; }
 
   .charts-row {
     display:grid; grid-template-columns: 3fr 2fr; gap:24px; margin-bottom:24px;
@@ -189,6 +191,22 @@
       </div>
     </div>
   </div>
+
+  <!-- Lifecycle section: Bar+Line combo and Radar -->
+  <div class="charts-row">
+    <div class="chart-section" style="margin-bottom:0">
+      <div class="chart-title">📊 用户生命周期反馈数量与负面率</div>
+      <div class="chart-wrapper chart-wrapper-lifecycle">
+        <canvas id="lifecycleChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-section" style="margin-bottom:0">
+      <div class="chart-title">🎯 用户生命周期负面反馈雷达图</div>
+      <div class="chart-wrapper chart-wrapper-radar">
+        <canvas id="lifecycleRadar"></canvas>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="footer">整车用户反馈数据看板 · 数据每日更新（T+1）</div>
@@ -201,6 +219,8 @@
   var identityChart = null;
   var vehicleBarChart = null;
   var wordCloudInstance = null;
+  var lifecycleChart = null;
+  var lifecycleRadar = null;
 
   var COLORS = [
     '#2d9a5f','#4db87c','#7bc99b','#a8dbb9','#d4eed9',
@@ -646,6 +666,119 @@
         }
       });
     } catch (e) { console.error('Error rendering identity chart:', e); }
+
+    // === Lifecycle Bar+Line Chart ===
+    try {
+      var lc = rawData.lifecycle;
+      if (lc) {
+        if (lifecycleChart) lifecycleChart.destroy();
+        lifecycleChart = new Chart(document.getElementById('lifecycleChart').getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: lc.labels,
+            datasets: [
+              {
+                type: 'bar', label: '反馈数量', data: lc.totals,
+                backgroundColor: 'rgba(45,154,95,0.7)', borderColor: '#2d9a5f', borderWidth: 1,
+                yAxisID: 'y', order: 2, barPercentage: 0.6, categoryPercentage: 0.8
+              },
+              {
+                type: 'line', label: '负面率 (%)', data: lc.rates,
+                borderColor: '#e85b5b', backgroundColor: '#e85b5b',
+                pointBackgroundColor: '#e85b5b', pointBorderColor: '#fff', pointBorderWidth: 2,
+                pointRadius: 5, pointHoverRadius: 7, borderWidth: 2.5, tension: 0.3,
+                yAxisID: 'y1', order: 1, fill: false
+              }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { position: 'bottom', labels: { padding: 12, usePointStyle: true, font: { size: 12 } } },
+              tooltip: {
+                backgroundColor: 'rgba(255,255,255,0.95)', titleColor: '#333', bodyColor: '#555',
+                borderColor: '#ddd', borderWidth: 1,
+                callbacks: {
+                  label: function(ctx) {
+                    if (ctx.dataset.yAxisID === 'y1') return '负面率: ' + ctx.parsed.y + '%';
+                    var idx = ctx.dataIndex;
+                    return '反馈数: ' + ctx.parsed.y.toLocaleString() + '  负面: ' + lc.negatives[idx].toLocaleString();
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: { size: 12 } } },
+              y: {
+                type: 'linear', position: 'left', beginAtZero: true,
+                ticks: { font: { size: 11 }, callback: function(v) { return v.toLocaleString(); } },
+                grid: { color: '#f0f0f0' },
+                title: { display: true, text: '反馈数量', font: { size: 12 }, color: '#999' }
+              },
+              y1: {
+                type: 'linear', position: 'right', beginAtZero: true,
+                ticks: { font: { size: 11 }, callback: function(v) { return v + '%'; } },
+                grid: { drawOnChartArea: false },
+                title: { display: true, text: '负面率', font: { size: 12 }, color: '#999' }
+              }
+            }
+          }
+        });
+      }
+    } catch (e) { console.error('Error rendering lifecycle chart:', e); }
+
+    // === Lifecycle Radar Chart ===
+    try {
+      var lc = rawData.lifecycle;
+      if (lc) {
+        if (lifecycleRadar) lifecycleRadar.destroy();
+        lifecycleRadar = new Chart(document.getElementById('lifecycleRadar').getContext('2d'), {
+          type: 'radar',
+          data: {
+            labels: lc.labels,
+            datasets: [
+              {
+                label: '总反馈数量', data: lc.totals,
+                borderColor: '#2d9a5f', backgroundColor: 'rgba(45,154,95,0.15)',
+                pointBackgroundColor: '#2d9a5f', pointBorderColor: '#fff', pointBorderWidth: 2,
+                pointRadius: 4, borderWidth: 2
+              },
+              {
+                label: '负面反馈数量', data: lc.negatives,
+                borderColor: '#e85b5b', backgroundColor: 'rgba(232,91,91,0.15)',
+                pointBackgroundColor: '#e85b5b', pointBorderColor: '#fff', pointBorderWidth: 2,
+                pointRadius: 4, borderWidth: 2
+              }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { padding: 14, usePointStyle: true, font: { size: 12 } } },
+              tooltip: {
+                backgroundColor: 'rgba(255,255,255,0.95)', titleColor: '#333', bodyColor: '#555',
+                borderColor: '#ddd', borderWidth: 1,
+                callbacks: {
+                  label: function(ctx) {
+                    return ctx.dataset.label + ': ' + ctx.parsed.r.toLocaleString();
+                  }
+                }
+              }
+            },
+            scales: {
+              r: {
+                beginAtZero: true,
+                ticks: { font: { size: 10 }, backdropColor: 'transparent', callback: function(v) { return v.toLocaleString(); } },
+                grid: { color: '#e0e0e0' },
+                angleLines: { color: '#e8e8e8' },
+                pointLabels: { font: { size: 12, weight: '500' }, color: '#555' }
+              }
+            }
+          }
+        });
+      }
+    } catch (e) { console.error('Error rendering lifecycle radar:', e); }
 
     // === Render local charts (word cloud + vehicle bar) ===
     renderLocalCharts();
