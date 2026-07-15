@@ -70,21 +70,31 @@
 
   /* Local filter for wordcloud & vehicle bar */
   .local-filter-bar {
-    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; align-items:center;
+    display:flex; align-items:center; flex-wrap:nowrap; gap:0; margin-bottom:12px;
+    background:#fff; border:1px solid #e8efe8; border-radius:8px; padding:12px 16px;
+    overflow-x:auto;
   }
   .local-filter-bar .filter-label {
-    font-size:13px; color:#666; font-weight:500; margin-right:4px;
+    font-size:14px; color:#333; font-weight:600; margin-right:12px; white-space:nowrap;
+    min-width:40px;
   }
   .local-filter-bar .filter-btn {
-    padding:4px 12px; background:#f5f9f5; color:#555; border:1px solid #d8e8d8;
-    border-radius:14px; font-size:12px; cursor:pointer; transition:all .2s;
-    white-space:nowrap;
+    padding:5px 16px; background:#fff; color:#555; border:1px solid #d9d9d9;
+    border-radius:4px; font-size:13px; cursor:pointer; transition:all .15s;
+    white-space:nowrap; margin-right:6px; line-height:1.5;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
   }
-  .local-filter-bar .filter-btn:hover { border-color:#2d9a5f; color:#2d9a5f; }
+  .local-filter-bar .filter-btn:hover {
+    border-color:#2d9a5f; color:#2d9a5f;
+  }
   .local-filter-bar .filter-btn.active {
     background:#2d9a5f; color:#fff; border-color:#2d9a5f;
   }
-  .local-filter-group { margin-bottom:10px; }
+  .local-filter-group {
+    display:flex; align-items:center; flex-wrap:nowrap; overflow-x:auto;
+    padding-bottom:2px;
+  }
+  .local-filter-group::-webkit-scrollbar { height:0; }
 
   .footer { text-align:center; padding:20px; color:#bbb; font-size:12px; }
 
@@ -155,13 +165,11 @@
 
   <!-- New section: Word Cloud + Vehicle Stacked Bar with local filters -->
   <div class="chart-section">
-    <div class="chart-title">🏷️ 一级问题分类分布</div>
-    <div class="local-filter-group" id="modelFilterGroup">
-      <span class="filter-label">车型：</span>
+    <div class="chart-title">️ 一级问题分类分布</div>
+    <div class="local-filter-bar">
+      <span class="filter-label">车型</span>
       <span id="modelFilterBtns"></span>
-    </div>
-    <div class="local-filter-group" id="yearFilterGroup">
-      <span class="filter-label">年款：</span>
+      <span class="filter-label" style="margin-left:24px;">年款</span>
       <span id="yearFilterBtns"></span>
     </div>
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-top:12px;">
@@ -251,6 +259,13 @@
     allYearBtn.onclick = function() { toggleYearFilter('__all__', this); };
     yearContainer.appendChild(allYearBtn);
 
+    var noYearBtn = document.createElement('button');
+    noYearBtn.className = 'filter-btn';
+    noYearBtn.textContent = '不区分年款';
+    noYearBtn.setAttribute('data-value', '__no_year__');
+    noYearBtn.onclick = function() { toggleYearFilter('__no_year__', this); };
+    yearContainer.appendChild(noYearBtn);
+
     for (var j = 0; j < years.length; j++) {
       var ybtn = document.createElement('button');
       ybtn.className = 'filter-btn';
@@ -294,6 +309,12 @@
       var btns = document.querySelectorAll('#yearFilterBtns .filter-btn');
       for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
       btn.classList.add('active');
+    } else if (value === '__no_year__') {
+      // "不区分年款" = show only records with empty/null year
+      selectedYears = ['__no_year__'];
+      var btns = document.querySelectorAll('#yearFilterBtns .filter-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      btn.classList.add('active');
     } else {
       var allBtn = document.querySelector('#yearFilterBtns .filter-btn[data-value="__all__"]');
       if (allBtn) allBtn.classList.remove('active');
@@ -316,11 +337,14 @@
   function getFilteredCrossData() {
     var crossData = rawData.cross_data || [];
     var filtered = [];
+    var noYearMode = selectedYears.indexOf('__no_year__') >= 0;
+    var hasSpecificYears = selectedYears.length > 0 && !noYearMode;
     for (var i = 0; i < crossData.length; i++) {
       var row = crossData[i];
       var model = row[0], year = row[1], cat = row[2], sent = row[3], cnt = row[4];
       if (selectedModels.length > 0 && selectedModels.indexOf(model) < 0) continue;
-      if (selectedYears.length > 0 && selectedYears.indexOf(year) < 0) continue;
+      if (hasSpecificYears && selectedYears.indexOf(year) < 0) continue;
+      if (noYearMode && year && year !== '') continue;
       filtered.push(row);
     }
     return filtered;
