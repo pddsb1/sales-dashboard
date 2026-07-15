@@ -733,19 +733,26 @@
       var lc = rawData.lifecycle;
       if (lc) {
         if (lifecycleRadar) lifecycleRadar.destroy();
+
+        // Normalize to 0-100% relative to each dataset's max, so both lines are visible
+        var maxTotal = Math.max.apply(null, lc.totals);
+        var maxNeg = Math.max.apply(null, lc.negatives);
+        var normTotals = lc.totals.map(function(v) { return Math.round(v / maxTotal * 1000) / 10; });
+        var normNegatives = lc.negatives.map(function(v) { return Math.round(v / maxNeg * 1000) / 10; });
+
         lifecycleRadar = new Chart(document.getElementById('lifecycleRadar').getContext('2d'), {
           type: 'radar',
           data: {
             labels: lc.labels,
             datasets: [
               {
-                label: '总反馈数量', data: lc.totals,
+                label: '总反馈数量', data: normTotals,
                 borderColor: '#2d9a5f', backgroundColor: 'rgba(45,154,95,0.15)',
                 pointBackgroundColor: '#2d9a5f', pointBorderColor: '#fff', pointBorderWidth: 2,
                 pointRadius: 4, borderWidth: 2
               },
               {
-                label: '负面反馈数量', data: lc.negatives,
+                label: '负面反馈数量', data: normNegatives,
                 borderColor: '#e85b5b', backgroundColor: 'rgba(232,91,91,0.15)',
                 pointBackgroundColor: '#e85b5b', pointBorderColor: '#fff', pointBorderWidth: 2,
                 pointRadius: 4, borderWidth: 2
@@ -761,18 +768,27 @@
                 borderColor: '#ddd', borderWidth: 1,
                 callbacks: {
                   label: function(ctx) {
-                    return ctx.dataset.label + ': ' + ctx.parsed.r.toLocaleString();
+                    var idx = ctx.dataIndex;
+                    if (ctx.datasetIndex === 0) {
+                      return '总反馈: ' + lc.totals[idx].toLocaleString() + ' (' + ctx.parsed.r + '%)';
+                    } else {
+                      return '负面反馈: ' + lc.negatives[idx].toLocaleString() + ' (' + ctx.parsed.r + '%)';
+                    }
                   }
                 }
               }
             },
             scales: {
               r: {
-                beginAtZero: true,
-                ticks: { font: { size: 10 }, backdropColor: 'transparent', callback: function(v) { return v.toLocaleString(); } },
+                beginAtZero: true, max: 100,
+                ticks: {
+                  font: { size: 10 }, backdropColor: 'transparent',
+                  stepSize: 20,
+                  callback: function(v) { return v + '%'; }
+                },
                 grid: { color: '#e0e0e0' },
                 angleLines: { color: '#e8e8e8' },
-                pointLabels: { font: { size: 12, weight: '500' }, color: '#555' }
+                pointLabels: { font: { size: 13, weight: '600' }, color: '#333' }
               }
             }
           }
