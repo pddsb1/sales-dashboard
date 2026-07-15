@@ -266,14 +266,13 @@
       console.error('Error rendering stacked bar chart:', e);
     }
 
-    // === Negative Rate Line Chart ===
+    // === Negative Rate Line Chart (独立于全局筛选，固定展示2026-01起) ===
     try {
       var nr = rawData.negative_rate;
       currentNrIndices = [];
-      var startMonth = start.slice(0, 7);
-      var endMonth = end.slice(0, 7);
+      var fixedStartMonth = '2026-01';
       for (var ni = 0; ni < nr.labels.length; ni++) {
-        if (nr.labels[ni] >= startMonth && nr.labels[ni] <= endMonth) {
+        if (nr.labels[ni] >= fixedStartMonth) {
           currentNrIndices.push(ni);
         }
       }
