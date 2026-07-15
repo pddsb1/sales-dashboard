@@ -54,10 +54,15 @@
 
   .chart-section {
     background:#fff; border-radius:12px; padding:24px 28px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05); margin-bottom:24px;
   }
   .chart-section .chart-title { font-size:15px; font-weight:600; color:#333; margin-bottom:16px; }
-  .chart-wrapper { position:relative; height:420px; }
+  .chart-wrapper { position:relative; height:380px; }
+
+  .charts-row {
+    display:grid; grid-template-columns: 1.2fr 0.8fr; gap:20px; margin-bottom:24px;
+  }
+  .charts-row .chart-wrapper { height:340px; }
 
   .footer { text-align:center; padding:20px; color:#bbb; font-size:12px; }
 </style>
@@ -103,19 +108,37 @@
       <canvas id="trendChart"></canvas>
     </div>
   </div>
+
+  <div class="charts-row">
+    <div class="chart-section" style="margin-bottom:0">
+      <div class="chart-title">📈 月度负面率变化趋势</div>
+      <div class="chart-wrapper">
+        <canvas id="negRateChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-section" style="margin-bottom:0">
+      <div class="chart-title">👥 反馈用户身份分布</div>
+      <div class="chart-wrapper">
+        <canvas id="identityChart"></canvas>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="footer">整车用户反馈数据看板 · 数据每日更新（T+1）</div>
 
 <script>
 let rawData = null;
-let chart = null;
+let trendChart = null;
+let negRateChart = null;
+let identityChart = null;
 
-// Color palette for sources
 const COLORS = [
   '#2d9a5f','#4db87c','#7bc99b','#a8dbb9','#d4eed9',
   '#1a7a4c','#e8a838','#5b8def','#e85b5b','#9b6dd7','#c8c8c8'
 ];
+
+const PIE_COLORS = ['#2d9a5f','#4db87c','#e8a838','#a8dbb9'];
 
 async function loadData() {
   const resp = await fetch('data.json');
@@ -127,16 +150,14 @@ async function loadData() {
 }
 
 function renderAll(start, end) {
+  // --- Cards & Stacked Bar ---
   const labels = rawData.chart.labels;
   const datasets = rawData.chart.datasets;
-
-  // Filter indices
   const indices = [];
   for (let i = 0; i < labels.length; i++) {
     if (labels[i] >= start && labels[i] <= end) indices.push(i);
   }
 
-  // Summary: sum all filtered
   let totalFb = 0;
   const filteredLabels = indices.map(i => labels[i]);
   const filteredDatasets = datasets.map(ds => {
@@ -145,7 +166,6 @@ function renderAll(start, end) {
     return { ...ds, data };
   });
 
-  // Unique users estimation (proportional)
   const allTotal = rawData.summary.total_feedback;
   const ratio = totalFb / allTotal;
   const estUsers = Math.round(rawData.summary.unique_users * ratio);
@@ -155,8 +175,8 @@ function renderAll(start, end) {
   document.getElementById('totalFeedbackSub').textContent = `${start} 至 ${end}`;
   document.getElementById('uniqueUsersSub').textContent = `去重用户数（估算）`;
 
-  // Chart
-  const chartDatasets = filteredDatasets.map((ds, idx) => ({
+  // Stacked Bar Chart
+  const barDatasets = filteredDatasets.map((ds, idx) => ({
     label: ds.label,
     data: ds.data,
     backgroundColor: COLORS[idx % COLORS.length],
@@ -165,42 +185,118 @@ function renderAll(start, end) {
     categoryPercentage: 0.9,
   }));
 
-  if (chart) chart.destroy();
-  const ctx = document.getElementById('trendChart').getContext('2d');
-  chart = new Chart(ctx, {
+  if (trendChart) trendChart.destroy();
+  trendChart = new Chart(document.getElementById('trendChart').getContext('2d'), {
     type: 'bar',
-    data: { labels: filteredLabels, datasets: chartDatasets },
+    data: { labels: filteredLabels, datasets: barDatasets },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: true, maintainAspectRatio: false,
       interaction: { mode:'index', intersect:false },
       plugins: {
-        legend: {
-          position:'bottom',
-          labels: { padding:12, usePointStyle:true, pointStyle:'rectRounded', font:{size:11} }
-        },
+        legend: { position:'bottom', labels: { padding:12, usePointStyle:true, pointStyle:'rectRounded', font:{size:11} } },
         tooltip: {
-          backgroundColor:'rgba(255,255,255,0.95)',
-          titleColor:'#333', bodyColor:'#555',
+          backgroundColor:'rgba(255,255,255,0.95)', titleColor:'#333', bodyColor:'#555',
+          borderColor:'#ddd', borderWidth:1,
+          callbacks: { footer: items => '合计: ' + items.reduce((a,i) => a + i.parsed.y, 0).toLocaleString() }
+        }
+      },
+      scales: {
+        x: { stacked:true, ticks:{ maxRotation:45, font:{size:10}, maxTicksLimit:30 }, grid:{display:false} },
+        y: { stacked:true, ticks:{ font:{size:11}, callback: v=>v.toLocaleString() }, grid:{color:'#f0f0f0'},
+             title:{display:true, text:'反馈数量', font:{size:12}, color:'#999'} }
+      }
+    }
+  });
+
+  // --- Negative Rate Line Chart (monthly) ---
+  const nr = rawData.negative_rate;
+  // Filter months within date range
+  const nrIndices = [];
+  for (let i = 0; i < nr.labels.length; i++) {
+    const monthEnd = nr.labels[i] + '-31';
+    if (nr.labels[i] >= start.slice(0,7) && nr.labels[i] <= end.slice(0,7)) {
+      nrIndices.push(i);
+    }
+  }
+
+  if (negRateChart) negRateChart.destroy();
+  negRateChart = new Chart(document.getElementById('negRateChart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: nrIndices.map(i => nr.labels[i]),
+      datasets: [{
+        label: '负面率 (%)',
+        data: nrIndices.map(i => nr.data[i]),
+        borderColor: '#e85b5b',
+        backgroundColor: 'rgba(232,91,91,0.08)',
+        fill: true,
+        tension: 0.35,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#e85b5b',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        borderWidth: 2.5
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display:false },
+        tooltip: {
+          backgroundColor:'rgba(255,255,255,0.95)', titleColor:'#333', bodyColor:'#555',
           borderColor:'#ddd', borderWidth:1,
           callbacks: {
-            footer: function(items) {
-              return '合计: ' + items.reduce((a,i) => a + i.parsed.y, 0).toLocaleString();
+            label: ctx => `负面率: ${ctx.parsed.y}%`,
+            afterLabel: ctx => {
+              const idx = nrIndices[ctx.dataIndex];
+              return `负向: ${nr.negative[idx]} / 总计: ${nr.total[idx]}`;
             }
           }
         }
       },
       scales: {
-        x: {
-          stacked: true,
-          ticks: { maxRotation:45, font:{size:10}, maxTicksLimit: 30 },
-          grid: { display:false }
-        },
+        x: { grid:{display:false}, ticks:{font:{size:11}} },
         y: {
-          stacked: true,
-          ticks: { font:{size:11}, callback: v => v.toLocaleString() },
-          grid: { color:'#f0f0f0' },
-          title: { display:true, text:'反馈数量', font:{size:12}, color:'#999' }
+          ticks:{ font:{size:11}, callback: v => v + '%' },
+          grid:{color:'#f0f0f0'},
+          title:{display:true, text:'负面率', font:{size:12}, color:'#999'},
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // --- Identity Pie Chart ---
+  const id = rawData.identity;
+  if (identityChart) identityChart.destroy();
+  identityChart = new Chart(document.getElementById('identityChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: id.map(d => d.name),
+      datasets: [{
+        data: id.map(d => d.value),
+        backgroundColor: PIE_COLORS,
+        borderColor: '#fff',
+        borderWidth: 3,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      cutout: '52%',
+      plugins: {
+        legend: { position:'bottom', labels:{ padding:16, usePointStyle:true, pointStyle:'circle', font:{size:12} } },
+        tooltip: {
+          backgroundColor:'rgba(255,255,255,0.95)', titleColor:'#333', bodyColor:'#555',
+          borderColor:'#ddd', borderWidth:1,
+          callbacks: {
+            label: ctx => {
+              const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
+              const pct = (ctx.parsed / total * 100).toFixed(1);
+              return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`;
+            }
+          }
         }
       }
     }
