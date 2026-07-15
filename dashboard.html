@@ -3,221 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>整车订单数据看板</title>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<title>整车用户反馈数据看板</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#f0f5f0;min-height:100vh;padding:20px;color:#333}
-.container{max-width:1440px;margin:0 auto}
-.header{background:linear-gradient(135deg,#1a472a 0%,#2d6a4f 50%,#40916c 100%);border-radius:16px;padding:28px 36px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(26,71,42,0.3)}
-.header h1{font-size:26px;font-weight:700;color:#fff;letter-spacing:1px}
-.header .sub{color:rgba(255,255,255,0.8);font-size:13px;margin-top:4px}
-.header .update-time{font-size:13px;color:rgba(255,255,255,0.7);text-align:right}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.stat-card{background:#fff;border-radius:14px;padding:22px 24px;border:1px solid #e8f5e9;transition:all .3s;position:relative;overflow:hidden}
-.stat-card:hover{box-shadow:0 6px 20px rgba(45,106,79,0.12);transform:translateY(-2px)}
-.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2d6a4f,#52b788);border-radius:14px 14px 0 0}
-.stat-card .icon{font-size:28px;margin-bottom:8px}
-.stat-card .label{font-size:13px;color:#888;margin-bottom:6px}
-.stat-card .value{font-size:30px;font-weight:700;color:#1a472a}
-.stat-card .change{font-size:12px;margin-top:8px;display:flex;align-items:center;gap:4px}
-.change.up{color:#40916c}
-.change.down{color:#e74c3c}
-.main-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
-.card{background:#fff;border-radius:14px;padding:24px;border:1px solid #e8f5e9;transition:all .3s}
-.card:hover{box-shadow:0 4px 16px rgba(45,106,79,0.1)}
-.card h3{font-size:15px;color:#2d6a4f;margin-bottom:16px;font-weight:600;display:flex;align-items:center;gap:8px}
-.card h3 .dot{width:8px;height:8px;border-radius:50%;background:#52b788}
-.chart{width:100%;height:300px}
-.filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
-.filter-bar .label-text{font-size:13px;color:#888;margin-right:4px}
-.filter-tag{padding:6px 16px;border-radius:20px;font-size:13px;border:1px solid #d8f3dc;background:#fff;color:#555;cursor:pointer;transition:all .2s;user-select:none}
-.filter-tag:hover{background:#d8f3dc;color:#1a472a}
-.filter-tag.active{background:#2d6a4f;color:#fff;border-color:#2d6a4f;box-shadow:0 2px 8px rgba(45,106,79,0.3)}
-.full-width{grid-column:1/-1}
-.bottom-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-.dealer-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f5f0}
-.dealer-item:last-child{border-bottom:none}
-.dealer-rank{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin-right:10px;flex-shrink:0}
-.rank1{background:#f59e0b}.rank2{background:#8b5cf6}.rank3{background:#3b82f6}.rank-other{background:#94a3b8}
-.dealer-name{flex:1;font-size:13px;color:#333}
-.dealer-count{font-size:13px;font-weight:600;color:#2d6a4f}
-.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.status-item{background:#f8fdf9;border-radius:10px;padding:14px;text-align:center;border:1px solid #e8f5e9}
-.status-item .s-label{font-size:12px;color:#888;margin-bottom:4px}
-.status-item .s-value{font-size:22px;font-weight:700;color:#2d6a4f}
-.color-bar{display:flex;height:28px;border-radius:8px;overflow:hidden;margin-top:12px}
-.color-segment{display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;transition:all .3s}
-.color-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.color-legend-item{display:flex;align-items:center;gap:4px;font-size:12px;color:#666}
-.color-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-@media(max-width:1024px){.stats-row{grid-template-columns:repeat(2,1fr)}.main-grid,.bottom-grid{grid-template-columns:1fr}}
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background:#f0f5f0; color:#333; min-height:100vh; }
+
+  .header {
+    background: linear-gradient(135deg, #1a7a4c 0%, #2d9a5f 50%, #3ab06a 100%);
+    color:#fff; padding:28px 40px 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .header h1 { font-size:22px; font-weight:600; letter-spacing:1px; }
+  .header .sub { font-size:13px; opacity:0.8; margin-top:4px; }
+
+  .filter-bar {
+    display:flex; align-items:center; gap:16px; padding:16px 40px;
+    background:#fff; border-bottom:1px solid #e8efe8;
+  }
+  .filter-bar label { font-size:14px; color:#555; font-weight:500; }
+  .filter-bar input[type="date"] {
+    padding:6px 12px; border:1px solid #c8d8c8; border-radius:6px;
+    font-size:13px; color:#333; background:#f8faf8; outline:none;
+  }
+  .filter-bar input[type="date"]:focus { border-color:#2d9a5f; }
+  .filter-bar .sep { color:#999; font-size:13px; }
+  .filter-bar button {
+    padding:6px 18px; background:#2d9a5f; color:#fff; border:none; border-radius:6px;
+    font-size:13px; cursor:pointer; transition: background .2s;
+  }
+  .filter-bar button:hover { background:#1a7a4c; }
+  .filter-bar .quick-btn {
+    padding:4px 12px; background:#e8f5e9; color:#2d9a5f; border:1px solid #c8e6c9;
+    border-radius:14px; font-size:12px; cursor:pointer; transition:all .2s;
+  }
+  .filter-bar .quick-btn:hover, .filter-bar .quick-btn.active {
+    background:#2d9a5f; color:#fff; border-color:#2d9a5f;
+  }
+
+  .container { padding:24px 40px 40px; }
+
+  .cards { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; margin-bottom:24px; }
+  .card {
+    background:#fff; border-radius:12px; padding:24px 28px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05); border-left:4px solid #2d9a5f;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .card .card-title { font-size:14px; color:#888; font-weight:400; }
+  .card .card-value { font-size:36px; font-weight:700; color:#1a7a4c; }
+  .card .card-sub { font-size:12px; color:#aaa; }
+
+  .chart-section {
+    background:#fff; border-radius:12px; padding:24px 28px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .chart-section .chart-title { font-size:15px; font-weight:600; color:#333; margin-bottom:16px; }
+  .chart-wrapper { position:relative; height:420px; }
+
+  .footer { text-align:center; padding:20px; color:#bbb; font-size:12px; }
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <div>
-            <h1>🚗 整车订单数据看板</h1>
-            <div class="sub">Sales Order Dashboard</div>
-        </div>
-        <div class="update-time" id="updateTime">加载中...</div>
-    </div>
 
-    <div class="stats-row">
-        <div class="stat-card"><div class="icon">📋</div><div class="label">总订单数</div><div class="value" id="statOrders">--</div><div class="change" id="statOrdersChange"></div></div>
-        <div class="stat-card"><div class="icon">💰</div><div class="label">总销售额（万元）</div><div class="value" id="statSales">--</div><div class="change" id="statSalesChange"></div></div>
-        <div class="stat-card"><div class="icon">📊</div><div class="label">均价（万元）</div><div class="value" id="statAvg">--</div></div>
-        <div class="stat-card"><div class="icon">🏷️</div><div class="label">涉及车型</div><div class="value" id="statModels">--</div></div>
-    </div>
-
-    <div class="filter-bar">
-        <span class="label-text">车辆类别：</span>
-        <span class="filter-tag active" data-category="全部">全部</span>
-    </div>
-
-    <div class="main-grid">
-        <div class="card"><h3><span class="dot"></span>每日订单量趋势</h3><div id="ordersChart" class="chart"></div></div>
-        <div class="card"><h3><span class="dot"></span>每日销售额趋势（万元）</h3><div id="salesChart" class="chart"></div></div>
-        <div class="card"><h3><span class="dot"></span>车辆类别占比</h3><div id="categoryChart" class="chart"></div></div>
-        <div class="card"><h3><span class="dot"></span>热销车型 Top 5</h3><div id="topChart" class="chart"></div></div>
-    </div>
-
-    <div class="bottom-grid">
-        <div class="card"><h3><span class="dot"></span>经销商销量排名</h3><div id="dealerList"></div></div>
-        <div class="card"><h3><span class="dot"></span>订单状态分布</h3><div id="statusChart" class="chart"></div></div>
-        <div class="card"><h3><span class="dot"></span>颜色偏好</h3><div id="colorSection"></div></div>
-    </div>
+<div class="header">
+  <h1>整车用户反馈数据看板</h1>
+  <div class="sub">数据来源：用户反馈系统 ｜ 最后更新：<span id="updateTime">-</span></div>
 </div>
 
+<div class="filter-bar">
+  <label>📅 日期范围</label>
+  <input type="date" id="startDate">
+  <span class="sep">至</span>
+  <input type="date" id="endDate">
+  <button onclick="applyFilter()">筛选</button>
+  <button onclick="resetFilter()">重置</button>
+  <span style="margin-left:12px;font-size:13px;color:#888;">快捷：</span>
+  <button class="quick-btn" onclick="quickRange(7)">近7天</button>
+  <button class="quick-btn" onclick="quickRange(30)">近30天</button>
+  <button class="quick-btn" onclick="quickRange(90)">近90天</button>
+  <button class="quick-btn" onclick="quickRange(0)">全部</button>
+</div>
+
+<div class="container">
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">总反馈数</div>
+      <div class="card-value" id="totalFeedback">-</div>
+      <div class="card-sub" id="totalFeedbackSub">当前筛选范围内</div>
+    </div>
+    <div class="card">
+      <div class="card-title">反馈人数</div>
+      <div class="card-value" id="uniqueUsers">-</div>
+      <div class="card-sub" id="uniqueUsersSub">去重用户数</div>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-title">📊 反馈数量趋势（按来源堆叠）</div>
+    <div class="chart-wrapper">
+      <canvas id="trendChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="footer">整车用户反馈数据看板 · 数据每日更新（T+1）</div>
+
 <script>
-let D=null,cat='全部';
-const charts={};
-const COLORS_MAP={'珍珠白':'#f8f9fa','曜石黑':'#2d3436','铂金灰':'#b2bec3','冰川蓝':'#74b9ff','极光银':'#dfe6e9','中国红':'#e74c3c','钛金棕':'#a0522d','星空紫':'#6c5ce7'};
-const CAT_COLORS=['#2d6a4f','#40916c','#52b788','#74c69d','#95d5b2','#b7e4c7'];
+let rawData = null;
+let chart = null;
 
-function init(){
-    ['ordersChart','salesChart','categoryChart','topChart','statusChart'].forEach(id=>{charts[id]=echarts.init(document.getElementById(id))});
-    document.querySelector('.filter-bar').addEventListener('click',e=>{
-        const t=e.target.closest('.filter-tag');if(!t)return;
-        document.querySelectorAll('.filter-tag').forEach(x=>x.classList.remove('active'));
-        t.classList.add('active');cat=t.dataset.category;renderAll()});
-    window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
-    loadData();
+// Color palette for sources
+const COLORS = [
+  '#2d9a5f','#4db87c','#7bc99b','#a8dbb9','#d4eed9',
+  '#1a7a4c','#e8a838','#5b8def','#e85b5b','#9b6dd7','#c8c8c8'
+];
+
+async function loadData() {
+  const resp = await fetch('data.json');
+  rawData = await resp.json();
+  document.getElementById('updateTime').textContent = new Date().toLocaleDateString('zh-CN');
+  document.getElementById('startDate').value = rawData.summary.date_range[0];
+  document.getElementById('endDate').value = rawData.summary.date_range[1];
+  renderAll(rawData.summary.date_range[0], rawData.summary.date_range[1]);
 }
 
-function loadData(){
-    fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(data=>{
-        D=data;
-        document.getElementById('updateTime').innerHTML='🕒 数据更新：'+data.update_time+'<br>共 '+data.daily_all.reduce((s,d)=>s+d.order_count,0)+' 台订单';
-        const fc=document.querySelector('.filter-bar');
-        data.category_sales.forEach(c=>{const s=document.createElement('span');s.className='filter-tag';s.dataset.category=c.category;s.textContent=c.category;fc.appendChild(s)});
-        renderAll();
-    }).catch(e=>{document.getElementById('updateTime').textContent='⚠️ 数据加载失败'});
-}
+function renderAll(start, end) {
+  const labels = rawData.chart.labels;
+  const datasets = rawData.chart.datasets;
 
-function getDaily(cat){
-    if(cat==='全部')return D.daily_all.map(d=>({orders:d.order_count,sales:d.total_sales,avg:d.avg_order_value}));
-    return D.dates.map((ds,i)=>{const fd=D.full_dates[i],cd=D.category_daily[cat];
-        const d=cd&&cd[fd];return{orders:d?d.order_count:0,sales:d?d.total_sales:0,avg:d&&d.order_count?d.total_sales/d.order_count:0}});
-}
+  // Filter indices
+  const indices = [];
+  for (let i = 0; i < labels.length; i++) {
+    if (labels[i] >= start && labels[i] <= end) indices.push(i);
+  }
 
-function renderAll(){
-    const daily=getDaily(cat);
-    const totalOrders=daily.reduce((s,d)=>s+d.orders,0);
-    const totalSales=daily.reduce((s,d)=>s+d.sales,0);
-    const avgP=totalOrders?totalSales/totalOrders:0;
-    const models=new Set();
-    if(cat==='全部')D.top_products.forEach(p=>models.add(p.product_name));
-    else D.top_products.filter(p=>p.category===cat).forEach(p=>models.add(p.product_name));
+  // Summary: sum all filtered
+  let totalFb = 0;
+  const filteredLabels = indices.map(i => labels[i]);
+  const filteredDatasets = datasets.map(ds => {
+    const data = indices.map(i => ds.data[i]);
+    totalFb += data.reduce((a,b) => a+b, 0);
+    return { ...ds, data };
+  });
 
-    document.getElementById('statOrders').textContent=totalOrders;
-    document.getElementById('statSales').textContent=totalSales.toFixed(1);
-    document.getElementById('statAvg').textContent=avgP.toFixed(1);
-    document.getElementById('statModels').textContent=models.size||'--';
+  // Unique users estimation (proportional)
+  const allTotal = rawData.summary.total_feedback;
+  const ratio = totalFb / allTotal;
+  const estUsers = Math.round(rawData.summary.unique_users * ratio);
 
-    if(daily.length>=2){
-        const latest=daily[daily.length-1],prev=daily[daily.length-2];
-        const oc=prev.orders?((latest.orders-prev.orders)/prev.orders*100).toFixed(1):0;
-        const sc=prev.sales?((latest.sales-prev.sales)/prev.sales*100).toFixed(1):0;
-        setChange('statOrdersChange',oc,'台');setChange('statSalesChange',sc,'万');
+  document.getElementById('totalFeedback').textContent = totalFb.toLocaleString();
+  document.getElementById('uniqueUsers').textContent = estUsers.toLocaleString();
+  document.getElementById('totalFeedbackSub').textContent = `${start} 至 ${end}`;
+  document.getElementById('uniqueUsersSub').textContent = `去重用户数（估算）`;
+
+  // Chart
+  const chartDatasets = filteredDatasets.map((ds, idx) => ({
+    label: ds.label,
+    data: ds.data,
+    backgroundColor: COLORS[idx % COLORS.length],
+    borderWidth: 0,
+    barPercentage: 0.85,
+    categoryPercentage: 0.9,
+  }));
+
+  if (chart) chart.destroy();
+  const ctx = document.getElementById('trendChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: filteredLabels, datasets: chartDatasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode:'index', intersect:false },
+      plugins: {
+        legend: {
+          position:'bottom',
+          labels: { padding:12, usePointStyle:true, pointStyle:'rectRounded', font:{size:11} }
+        },
+        tooltip: {
+          backgroundColor:'rgba(255,255,255,0.95)',
+          titleColor:'#333', bodyColor:'#555',
+          borderColor:'#ddd', borderWidth:1,
+          callbacks: {
+            footer: function(items) {
+              return '合计: ' + items.reduce((a,i) => a + i.parsed.y, 0).toLocaleString();
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+          ticks: { maxRotation:45, font:{size:10}, maxTicksLimit: 30 },
+          grid: { display:false }
+        },
+        y: {
+          stacked: true,
+          ticks: { font:{size:11}, callback: v => v.toLocaleString() },
+          grid: { color:'#f0f0f0' },
+          title: { display:true, text:'反馈数量', font:{size:12}, color:'#999' }
+        }
+      }
     }
-
-    // 订单量趋势
-    charts.ordersChart.setOption({tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#e8f5e9',textStyle:{color:'#333'}},
-        grid:{left:'3%',right:'4%',bottom:'8%',top:'10%',containLabel:true},
-        xAxis:{type:'category',data:D.dates,axisLine:{lineStyle:{color:'#eee'}},axisLabel:{color:'#666'}},
-        yAxis:{type:'value',axisLine:{show:false},splitLine:{lineStyle:{color:'#f5f5f5'}},axisLabel:{color:'#999'}},
-        series:[{data:daily.map(d=>d.orders),type:'bar',barWidth:'50%',itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#52b788'},{offset:1,color:'#2d6a4f'}]),borderRadius:[6,6,0,0]},
-            label:{show:true,position:'top',color:'#2d6a4f',fontSize:12,fontWeight:600}}]});
-
-    // 销售额趋势
-    charts.salesChart.setOption({tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:'#e8f5e9',textStyle:{color:'#333'},formatter:p=>'销售额: ¥'+p[0].value+'万'},
-        grid:{left:'3%',right:'4%',bottom:'8%',top:'10%',containLabel:true},
-        xAxis:{type:'category',data:D.dates,axisLine:{lineStyle:{color:'#eee'}},axisLabel:{color:'#666'}},
-        yAxis:{type:'value',axisLine:{show:false},splitLine:{lineStyle:{color:'#f5f5f5'}},axisLabel:{color:'#999',formatter:'¥{value}'}},
-        series:[{data:daily.map(d=>d.sales),type:'line',smooth:true,symbol:'circle',symbolSize:8,
-            itemStyle:{color:'#40916c'},lineStyle:{color:'#40916c',width:3},
-            areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(64,145,108,0.3)'},{offset:1,color:'rgba(64,145,108,0)'}])}}]});
-
-    // 品类占比
-    const pieData=cat==='全部'?D.category_sales.map(c=>({name:c.category,value:c.order_count})):
-        [{name:cat,value:D.category_sales.find(c=>c.category===cat)?.order_count||0}];
-    charts.categoryChart.setOption({tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#e8f5e9',textStyle:{color:'#333'},formatter:'{b}<br/>{c}台 ({d}%)'},
-        color:CAT_COLORS,series:[{type:'pie',radius:['40%','72%'],center:['50%','55%'],
-            itemStyle:{borderRadius:8,borderColor:'#fff',borderWidth:3},
-            label:{show:true,formatter:'{b}\n{d}%',fontSize:12,color:'#555'},
-            data:pieData}]});
-
-    // Top5
-    const tp=cat==='全部'?D.top_products:D.top_products.filter(p=>p.category===cat);
-    const tp5=tp.slice(0,5);
-    charts.topChart.setOption({tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#fff',borderColor:'#e8f5e9',textStyle:{color:'#333'}},
-        grid:{left:'3%',right:'12%',bottom:'3%',top:'3%',containLabel:true},
-        xAxis:{type:'value',axisLine:{show:false},splitLine:{lineStyle:{color:'#f5f5f5'}},axisLabel:{color:'#999'}},
-        yAxis:{type:'category',data:tp5.map(p=>p.product_name).reverse(),axisLine:{lineStyle:{color:'#eee'}},axisLabel:{color:'#333',fontSize:12}},
-        series:[{data:tp5.map(p=>p.total_quantity).reverse(),type:'bar',barWidth:'55%',
-            itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#2d6a4f'},{offset:1,color:'#52b788'}]),borderRadius:[0,6,6,0]},
-            label:{show:true,position:'right',color:'#2d6a4f',fontSize:12,fontWeight:600,formatter:'{c}台'}}]});
-
-    // 订单状态
-    const sd=D.order_status_dist;
-    const sLabels=Object.keys(sd),sValues=Object.values(sd);
-    const sColors=['#2d6a4f','#40916c','#52b788','#74c69d','#95d5b2'];
-    charts.statusChart.setOption({tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#e8f5e9',textStyle:{color:'#333'}},
-        color:sColors,series:[{type:'pie',radius:['0%','70%'],center:['50%','55%'],roseType:'area',
-            itemStyle:{borderRadius:6,borderColor:'#fff',borderWidth:2},
-            label:{formatter:'{b}\n{c}台',fontSize:11,color:'#555'},
-            data:sLabels.map((l,i)=>({name:l,value:sValues[i]}))}]});
-
-    // 经销商排名
-    const dl=cat==='全部'?D.top_dealers:D.top_dealers;
-    const dlHtml=dl.map((d,i)=>{
-        const rc=i===0?'rank1':i===1?'rank2':i===2?'rank3':'rank-other';
-        return '<div class="dealer-item"><span class="dealer-rank '+rc+'">'+(i+1)+'</span><span class="dealer-name">'+d.dealer+'</span><span class="dealer-count">'+d.order_count+'台</span></div>'
-    }).join('');
-    document.getElementById('dealerList').innerHTML=dlHtml;
-
-    // 颜色偏好
-    const cd=D.color_dist;
-    const total=cd.reduce((s,c)=>s+c.count,0);
-    const barHtml=cd.map(c=>{
-        const pct=(c.count/total*100).toFixed(1);
-        const clr=COLORS_MAP[c.color]||'#adb5bd';
-        const txt=pct>8?c.color+' '+pct+'%':'';
-        return '<div class="color-segment" style="width:'+pct+'%;background:'+clr+';color:'+(clr==='#f8f9fa'||clr==='#dfe6e9'?'#333':'#fff')+'">'+txt+'</div>'
-    }).join('');
-    const legendHtml=cd.map(c=>'<div class="color-legend-item"><span class="color-dot" style="background:'+(COLORS_MAP[c.color]||'#adb5bd')+'"></span>'+c.color+' '+c.count+'台</div>').join('');
-    document.getElementById('colorSection').innerHTML='<div class="color-bar">'+barHtml+'</div><div class="color-legend">'+legendHtml+'</div>';
+  });
 }
 
-function setChange(id,val,unit){
-    const el=document.getElementById(id);const n=parseFloat(val);
-    el.className='change '+(n>=0?'up':'down');
-    el.textContent=(n>=0?'↑':'↓')+' '+Math.abs(n)+'% 环比';
+function applyFilter() {
+  const s = document.getElementById('startDate').value;
+  const e = document.getElementById('endDate').value;
+  if (s && e && s <= e) renderAll(s, e);
 }
 
-document.addEventListener('DOMContentLoaded',init);
+function resetFilter() {
+  const dr = rawData.summary.date_range;
+  document.getElementById('startDate').value = dr[0];
+  document.getElementById('endDate').value = dr[1];
+  document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+  renderAll(dr[0], dr[1]);
+}
+
+function quickRange(days) {
+  document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const maxD = rawData.summary.date_range[1];
+  const end = new Date(maxD);
+  if (days === 0) {
+    const minD = rawData.summary.date_range[0];
+    document.getElementById('startDate').value = minD;
+    document.getElementById('endDate').value = maxD;
+    renderAll(minD, maxD);
+  } else {
+    const start = new Date(end);
+    start.setDate(start.getDate() - days + 1);
+    const s = start.toISOString().slice(0,10);
+    document.getElementById('startDate').value = s;
+    document.getElementById('endDate').value = maxD;
+    renderAll(s, maxD);
+  }
+}
+
+loadData();
 </script>
 </body>
 </html>
