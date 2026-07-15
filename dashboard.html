@@ -234,8 +234,11 @@
     var modelContainer = document.getElementById('modelFilterBtns');
     var yearContainer = document.getElementById('yearFilterBtns');
 
+    var btnStyle = 'padding:5px 16px;background:#fff;color:#555;border:1px solid #d9d9d9;border-radius:4px;font-size:13px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-right:6px;line-height:1.5;font-family:inherit;display:inline-block;';
+
     // Add "All" button for models
     var allModelBtn = document.createElement('button');
+    allModelBtn.setAttribute('style', btnStyle + 'background:#2d9a5f;color:#fff;border-color:#2d9a5f;');
     allModelBtn.className = 'filter-btn active';
     allModelBtn.textContent = '全部';
     allModelBtn.setAttribute('data-value', '__all__');
@@ -244,6 +247,7 @@
 
     for (var i = 0; i < models.length; i++) {
       var btn = document.createElement('button');
+      btn.setAttribute('style', btnStyle);
       btn.className = 'filter-btn';
       btn.textContent = models[i];
       btn.setAttribute('data-value', models[i]);
@@ -253,6 +257,7 @@
 
     // Add "All" button for years
     var allYearBtn = document.createElement('button');
+    allYearBtn.setAttribute('style', btnStyle + 'background:#2d9a5f;color:#fff;border-color:#2d9a5f;');
     allYearBtn.className = 'filter-btn active';
     allYearBtn.textContent = '全部';
     allYearBtn.setAttribute('data-value', '__all__');
@@ -260,6 +265,7 @@
     yearContainer.appendChild(allYearBtn);
 
     var noYearBtn = document.createElement('button');
+    noYearBtn.setAttribute('style', btnStyle);
     noYearBtn.className = 'filter-btn';
     noYearBtn.textContent = '不区分年款';
     noYearBtn.setAttribute('data-value', '__no_year__');
@@ -268,6 +274,7 @@
 
     for (var j = 0; j < years.length; j++) {
       var ybtn = document.createElement('button');
+      ybtn.setAttribute('style', btnStyle);
       ybtn.className = 'filter-btn';
       ybtn.textContent = years[j];
       ybtn.setAttribute('data-value', years[j]);
@@ -276,28 +283,38 @@
     }
   }
 
+  var baseBtnStyle = 'padding:5px 16px;background:#fff;color:#555;border:1px solid #d9d9d9;border-radius:4px;font-size:13px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-right:6px;line-height:1.5;font-family:inherit;display:inline-block;';
+  var activeBtnStyle = 'padding:5px 16px;background:#2d9a5f;color:#fff;border:1px solid #2d9a5f;border-radius:4px;font-size:13px;cursor:pointer;transition:all .15s;white-space:nowrap;margin-right:6px;line-height:1.5;font-family:inherit;display:inline-block;';
+
+  function applyBtnActive(btn) {
+    btn.setAttribute('style', activeBtnStyle);
+    btn.classList.add('active');
+  }
+  function applyBtnInactive(btn) {
+    btn.setAttribute('style', baseBtnStyle);
+    btn.classList.remove('active');
+  }
+
   function toggleModelFilter(value, btn) {
     if (value === '__all__') {
       selectedModels = [];
       var btns = document.querySelectorAll('#modelFilterBtns .filter-btn');
-      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-      btn.classList.add('active');
+      for (var i = 0; i < btns.length; i++) applyBtnInactive(btns[i]);
+      applyBtnActive(btn);
     } else {
-      // Remove "all" active state
       var allBtn = document.querySelector('#modelFilterBtns .filter-btn[data-value="__all__"]');
-      if (allBtn) allBtn.classList.remove('active');
+      if (allBtn) applyBtnInactive(allBtn);
 
       var idx = selectedModels.indexOf(value);
       if (idx >= 0) {
         selectedModels.splice(idx, 1);
-        btn.classList.remove('active');
+        applyBtnInactive(btn);
       } else {
         selectedModels.push(value);
-        btn.classList.add('active');
+        applyBtnActive(btn);
       }
-      // If nothing selected, re-activate "all"
       if (selectedModels.length === 0) {
-        if (allBtn) allBtn.classList.add('active');
+        if (allBtn) applyBtnActive(allBtn);
       }
     }
     renderLocalCharts();
@@ -307,28 +324,27 @@
     if (value === '__all__') {
       selectedYears = [];
       var btns = document.querySelectorAll('#yearFilterBtns .filter-btn');
-      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-      btn.classList.add('active');
+      for (var i = 0; i < btns.length; i++) applyBtnInactive(btns[i]);
+      applyBtnActive(btn);
     } else if (value === '__no_year__') {
-      // "不区分年款" = show only records with empty/null year
       selectedYears = ['__no_year__'];
       var btns = document.querySelectorAll('#yearFilterBtns .filter-btn');
-      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-      btn.classList.add('active');
+      for (var i = 0; i < btns.length; i++) applyBtnInactive(btns[i]);
+      applyBtnActive(btn);
     } else {
       var allBtn = document.querySelector('#yearFilterBtns .filter-btn[data-value="__all__"]');
-      if (allBtn) allBtn.classList.remove('active');
+      if (allBtn) applyBtnInactive(allBtn);
 
       var idx = selectedYears.indexOf(value);
       if (idx >= 0) {
         selectedYears.splice(idx, 1);
-        btn.classList.remove('active');
+        applyBtnInactive(btn);
       } else {
         selectedYears.push(value);
-        btn.classList.add('active');
+        applyBtnActive(btn);
       }
       if (selectedYears.length === 0) {
-        if (allBtn) allBtn.classList.add('active');
+        if (allBtn) applyBtnActive(allBtn);
       }
     }
     renderLocalCharts();
