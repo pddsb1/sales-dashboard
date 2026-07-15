@@ -17,7 +17,7 @@
   .header .sub { font-size:13px; opacity:0.8; margin-top:4px; }
 
   .filter-bar {
-    display:flex; align-items:center; gap:16px; padding:16px 40px;
+    display:flex; align-items:center; flex-wrap:wrap; gap:12px; padding:16px 40px;
     background:#fff; border-bottom:1px solid #e8efe8;
   }
   .filter-bar label { font-size:14px; color:#555; font-weight:500; }
@@ -27,11 +27,11 @@
   }
   .filter-bar input[type="date"]:focus { border-color:#2d9a5f; }
   .filter-bar .sep { color:#999; font-size:13px; }
-  .filter-bar button {
+  .filter-bar .btn-primary {
     padding:6px 18px; background:#2d9a5f; color:#fff; border:none; border-radius:6px;
     font-size:13px; cursor:pointer; transition: background .2s;
   }
-  .filter-bar button:hover { background:#1a7a4c; }
+  .filter-bar .btn-primary:hover { background:#1a7a4c; }
   .filter-bar .quick-btn {
     padding:4px 12px; background:#e8f5e9; color:#2d9a5f; border:1px solid #c8e6c9;
     border-radius:14px; font-size:12px; cursor:pointer; transition:all .2s;
@@ -40,7 +40,7 @@
     background:#2d9a5f; color:#fff; border-color:#2d9a5f;
   }
 
-  .container { padding:24px 40px 40px; }
+  .container { padding:24px 40px 40px; max-width:1400px; margin:0 auto; }
 
   .cards { display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; margin-bottom:24px; }
   .card {
@@ -57,14 +57,23 @@
     box-shadow: 0 1px 6px rgba(0,0,0,0.05); margin-bottom:24px;
   }
   .chart-section .chart-title { font-size:15px; font-weight:600; color:#333; margin-bottom:16px; }
-  .chart-wrapper { position:relative; height:380px; }
+  .chart-wrapper { position:relative; width:100%; }
+  .chart-wrapper-bar { height:400px; }
+  .chart-wrapper-line { height:350px; }
+  .chart-wrapper-pie { height:350px; max-width:500px; margin:0 auto; }
 
   .charts-row {
-    display:grid; grid-template-columns: 1.2fr 0.8fr; gap:20px; margin-bottom:24px;
+    display:grid; grid-template-columns: 3fr 2fr; gap:24px; margin-bottom:24px;
   }
-  .charts-row .chart-wrapper { height:340px; }
 
   .footer { text-align:center; padding:20px; color:#bbb; font-size:12px; }
+
+  @media (max-width:768px) {
+    .charts-row { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr; }
+    .container { padding:16px; }
+    .header, .filter-bar { padding-left:16px; padding-right:16px; }
+  }
 </style>
 </head>
 <body>
@@ -79,13 +88,13 @@
   <input type="date" id="startDate">
   <span class="sep">至</span>
   <input type="date" id="endDate">
-  <button onclick="applyFilter()">筛选</button>
-  <button onclick="resetFilter()">重置</button>
-  <span style="margin-left:12px;font-size:13px;color:#888;">快捷：</span>
-  <button class="quick-btn" onclick="quickRange(7)">近7天</button>
-  <button class="quick-btn" onclick="quickRange(30)">近30天</button>
-  <button class="quick-btn" onclick="quickRange(90)">近90天</button>
-  <button class="quick-btn" onclick="quickRange(0)">全部</button>
+  <button class="btn-primary" onclick="applyFilter()">筛选</button>
+  <button class="btn-primary" onclick="resetFilter()">重置</button>
+  <span style="margin-left:8px;font-size:13px;color:#888;">快捷：</span>
+  <button class="quick-btn" onclick="quickRange(7, this)">近7天</button>
+  <button class="quick-btn" onclick="quickRange(30, this)">近30天</button>
+  <button class="quick-btn" onclick="quickRange(90, this)">近90天</button>
+  <button class="quick-btn" onclick="quickRange(0, this)">全部</button>
 </div>
 
 <div class="container">
@@ -104,7 +113,7 @@
 
   <div class="chart-section">
     <div class="chart-title">📊 反馈数量趋势（按来源堆叠）</div>
-    <div class="chart-wrapper">
+    <div class="chart-wrapper chart-wrapper-bar">
       <canvas id="trendChart"></canvas>
     </div>
   </div>
@@ -112,13 +121,13 @@
   <div class="charts-row">
     <div class="chart-section" style="margin-bottom:0">
       <div class="chart-title">📈 月度负面率变化趋势</div>
-      <div class="chart-wrapper">
+      <div class="chart-wrapper chart-wrapper-line">
         <canvas id="negRateChart"></canvas>
       </div>
     </div>
     <div class="chart-section" style="margin-bottom:0">
       <div class="chart-title">👥 反馈用户身份分布</div>
-      <div class="chart-wrapper">
+      <div class="chart-wrapper chart-wrapper-pie">
         <canvas id="identityChart"></canvas>
       </div>
     </div>
@@ -128,216 +137,308 @@
 <div class="footer">整车用户反馈数据看板 · 数据每日更新（T+1）</div>
 
 <script>
-let rawData = null;
-let trendChart = null;
-let negRateChart = null;
-let identityChart = null;
+(function() {
+  var rawData = null;
+  var trendChart = null;
+  var negRateChart = null;
+  var identityChart = null;
 
-const COLORS = [
-  '#2d9a5f','#4db87c','#7bc99b','#a8dbb9','#d4eed9',
-  '#1a7a4c','#e8a838','#5b8def','#e85b5b','#9b6dd7','#c8c8c8'
-];
+  var COLORS = [
+    '#2d9a5f','#4db87c','#7bc99b','#a8dbb9','#d4eed9',
+    '#1a7a4c','#e8a838','#5b8def','#e85b5b','#9b6dd7','#c8c8c8'
+  ];
 
-const PIE_COLORS = ['#2d9a5f','#4db87c','#e8a838','#a8dbb9'];
+  var PIE_COLORS = ['#2d9a5f','#4db87c','#e8a838','#a8dbb9'];
 
-async function loadData() {
-  const resp = await fetch('data.json');
-  rawData = await resp.json();
-  document.getElementById('updateTime').textContent = new Date().toLocaleDateString('zh-CN');
-  document.getElementById('startDate').value = rawData.summary.date_range[0];
-  document.getElementById('endDate').value = rawData.summary.date_range[1];
-  renderAll(rawData.summary.date_range[0], rawData.summary.date_range[1]);
-}
+  // Current nrIndices for tooltip
+  var currentNrIndices = [];
 
-function renderAll(start, end) {
-  // --- Cards & Stacked Bar ---
-  const labels = rawData.chart.labels;
-  const datasets = rawData.chart.datasets;
-  const indices = [];
-  for (let i = 0; i < labels.length; i++) {
-    if (labels[i] >= start && labels[i] <= end) indices.push(i);
+  function loadData() {
+    fetch('data.json')
+      .then(function(resp) { return resp.json(); })
+      .then(function(data) {
+        rawData = data;
+        document.getElementById('updateTime').textContent = new Date().toLocaleDateString('zh-CN');
+        document.getElementById('startDate').value = rawData.summary.date_range[0];
+        document.getElementById('endDate').value = rawData.summary.date_range[1];
+        renderAll(rawData.summary.date_range[0], rawData.summary.date_range[1]);
+      })
+      .catch(function(err) {
+        console.error('Failed to load data:', err);
+      });
   }
 
-  let totalFb = 0;
-  const filteredLabels = indices.map(i => labels[i]);
-  const filteredDatasets = datasets.map(ds => {
-    const data = indices.map(i => ds.data[i]);
-    totalFb += data.reduce((a,b) => a+b, 0);
-    return { ...ds, data };
-  });
-
-  const allTotal = rawData.summary.total_feedback;
-  const ratio = totalFb / allTotal;
-  const estUsers = Math.round(rawData.summary.unique_users * ratio);
-
-  document.getElementById('totalFeedback').textContent = totalFb.toLocaleString();
-  document.getElementById('uniqueUsers').textContent = estUsers.toLocaleString();
-  document.getElementById('totalFeedbackSub').textContent = `${start} 至 ${end}`;
-  document.getElementById('uniqueUsersSub').textContent = `去重用户数（估算）`;
-
-  // Stacked Bar Chart
-  const barDatasets = filteredDatasets.map((ds, idx) => ({
-    label: ds.label,
-    data: ds.data,
-    backgroundColor: COLORS[idx % COLORS.length],
-    borderWidth: 0,
-    barPercentage: 0.85,
-    categoryPercentage: 0.9,
-  }));
-
-  if (trendChart) trendChart.destroy();
-  trendChart = new Chart(document.getElementById('trendChart').getContext('2d'), {
-    type: 'bar',
-    data: { labels: filteredLabels, datasets: barDatasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: { mode:'index', intersect:false },
-      plugins: {
-        legend: { position:'bottom', labels: { padding:12, usePointStyle:true, pointStyle:'rectRounded', font:{size:11} } },
-        tooltip: {
-          backgroundColor:'rgba(255,255,255,0.95)', titleColor:'#333', bodyColor:'#555',
-          borderColor:'#ddd', borderWidth:1,
-          callbacks: { footer: items => '合计: ' + items.reduce((a,i) => a + i.parsed.y, 0).toLocaleString() }
-        }
-      },
-      scales: {
-        x: { stacked:true, ticks:{ maxRotation:45, font:{size:10}, maxTicksLimit:30 }, grid:{display:false} },
-        y: { stacked:true, ticks:{ font:{size:11}, callback: v=>v.toLocaleString() }, grid:{color:'#f0f0f0'},
-             title:{display:true, text:'反馈数量', font:{size:12}, color:'#999'} }
+  function renderAll(start, end) {
+    try {
+      var labels = rawData.chart.labels;
+      var datasets = rawData.chart.datasets;
+      var indices = [];
+      var i;
+      for (i = 0; i < labels.length; i++) {
+        if (labels[i] >= start && labels[i] <= end) indices.push(i);
       }
-    }
-  });
 
-  // --- Negative Rate Line Chart (monthly) ---
-  const nr = rawData.negative_rate;
-  // Filter months within date range
-  const nrIndices = [];
-  for (let i = 0; i < nr.labels.length; i++) {
-    const monthEnd = nr.labels[i] + '-31';
-    if (nr.labels[i] >= start.slice(0,7) && nr.labels[i] <= end.slice(0,7)) {
-      nrIndices.push(i);
-    }
-  }
+      // Calculate totals
+      var totalFb = 0;
+      var filteredLabels = [];
+      var filteredDatasets = [];
+      for (var di = 0; di < datasets.length; di++) {
+        var ds = datasets[di];
+        var newData = [];
+        for (var ii = 0; ii < indices.length; ii++) {
+          newData.push(ds.data[indices[ii]]);
+        }
+        var sum = 0;
+        for (var j = 0; j < newData.length; j++) sum += newData[j];
+        totalFb += sum;
+        filteredDatasets.push({ label: ds.label, data: newData });
+      }
+      for (var k = 0; k < indices.length; k++) {
+        filteredLabels.push(labels[indices[k]]);
+      }
 
-  if (negRateChart) negRateChart.destroy();
-  negRateChart = new Chart(document.getElementById('negRateChart').getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: nrIndices.map(i => nr.labels[i]),
-      datasets: [{
-        label: '负面率 (%)',
-        data: nrIndices.map(i => nr.data[i]),
-        borderColor: '#e85b5b',
-        backgroundColor: 'rgba(232,91,91,0.08)',
-        fill: true,
-        tension: 0.35,
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        pointBackgroundColor: '#e85b5b',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        borderWidth: 2.5
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display:false },
-        tooltip: {
-          backgroundColor:'rgba(255,255,255,0.95)', titleColor:'#333', bodyColor:'#555',
-          borderColor:'#ddd', borderWidth:1,
-          callbacks: {
-            label: ctx => `负面率: ${ctx.parsed.y}%`,
-            afterLabel: ctx => {
-              const idx = nrIndices[ctx.dataIndex];
-              return `负向: ${nr.negative[idx]} / 总计: ${nr.total[idx]}`;
+      var allTotal = rawData.summary.total_feedback;
+      var ratio = totalFb / allTotal;
+      var estUsers = Math.round(rawData.summary.unique_users * ratio);
+
+      document.getElementById('totalFeedback').textContent = totalFb.toLocaleString();
+      document.getElementById('uniqueUsers').textContent = estUsers.toLocaleString();
+      document.getElementById('totalFeedbackSub').textContent = start + ' 至 ' + end;
+      document.getElementById('uniqueUsersSub').textContent = '去重用户数（估算）';
+
+      // === Stacked Bar Chart ===
+      var barDatasets = [];
+      for (var bi = 0; bi < filteredDatasets.length; bi++) {
+        barDatasets.push({
+          label: filteredDatasets[bi].label,
+          data: filteredDatasets[bi].data,
+          backgroundColor: COLORS[bi % COLORS.length],
+          borderWidth: 0,
+          barPercentage: 0.85,
+          categoryPercentage: 0.9
+        });
+      }
+
+      if (trendChart) trendChart.destroy();
+      trendChart = new Chart(document.getElementById('trendChart').getContext('2d'), {
+        type: 'bar',
+        data: { labels: filteredLabels, datasets: barDatasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { padding: 12, usePointStyle: true, pointStyle: 'rectRounded', font: { size: 11 } }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255,255,255,0.95)',
+              titleColor: '#333',
+              bodyColor: '#555',
+              borderColor: '#ddd',
+              borderWidth: 1,
+              callbacks: {
+                footer: function(items) {
+                  var total = 0;
+                  for (var t = 0; t < items.length; t++) total += items[t].parsed.y;
+                  return '合计: ' + total.toLocaleString();
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              stacked: true,
+              ticks: { maxRotation: 45, font: { size: 10 }, maxTicksLimit: 30 },
+              grid: { display: false }
+            },
+            y: {
+              stacked: true,
+              ticks: { font: { size: 11 }, callback: function(v) { return v.toLocaleString(); } },
+              grid: { color: '#f0f0f0' },
+              title: { display: true, text: '反馈数量', font: { size: 12 }, color: '#999' }
             }
           }
         }
-      },
-      scales: {
-        x: { grid:{display:false}, ticks:{font:{size:11}} },
-        y: {
-          ticks:{ font:{size:11}, callback: v => v + '%' },
-          grid:{color:'#f0f0f0'},
-          title:{display:true, text:'负面率', font:{size:12}, color:'#999'},
-          beginAtZero: true
+      });
+    } catch (e) {
+      console.error('Error rendering stacked bar chart:', e);
+    }
+
+    // === Negative Rate Line Chart ===
+    try {
+      var nr = rawData.negative_rate;
+      currentNrIndices = [];
+      var startMonth = start.slice(0, 7);
+      var endMonth = end.slice(0, 7);
+      for (var ni = 0; ni < nr.labels.length; ni++) {
+        if (nr.labels[ni] >= startMonth && nr.labels[ni] <= endMonth) {
+          currentNrIndices.push(ni);
         }
       }
-    }
-  });
 
-  // --- Identity Pie Chart ---
-  const id = rawData.identity;
-  if (identityChart) identityChart.destroy();
-  identityChart = new Chart(document.getElementById('identityChart').getContext('2d'), {
-    type: 'doughnut',
-    data: {
-      labels: id.map(d => d.name),
-      datasets: [{
-        data: id.map(d => d.value),
-        backgroundColor: PIE_COLORS,
-        borderColor: '#fff',
-        borderWidth: 3,
-        hoverOffset: 8
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      cutout: '52%',
-      plugins: {
-        legend: { position:'bottom', labels:{ padding:16, usePointStyle:true, pointStyle:'circle', font:{size:12} } },
-        tooltip: {
-          backgroundColor:'rgba(255,255,255,0.95)', titleColor:'#333', bodyColor:'#555',
-          borderColor:'#ddd', borderWidth:1,
-          callbacks: {
-            label: ctx => {
-              const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
-              const pct = (ctx.parsed / total * 100).toFixed(1);
-              return ` ${ctx.label}: ${ctx.parsed.toLocaleString()} (${pct}%)`;
+      var nrLabels = [];
+      var nrData = [];
+      for (var nj = 0; nj < currentNrIndices.length; nj++) {
+        nrLabels.push(nr.labels[currentNrIndices[nj]]);
+        nrData.push(nr.data[currentNrIndices[nj]]);
+      }
+
+      if (negRateChart) negRateChart.destroy();
+      negRateChart = new Chart(document.getElementById('negRateChart').getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: nrLabels,
+          datasets: [{
+            label: '负面率 (%)',
+            data: nrData,
+            borderColor: '#e85b5b',
+            backgroundColor: 'rgba(232,91,91,0.08)',
+            fill: true,
+            tension: 0.35,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            pointBackgroundColor: '#e85b5b',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            borderWidth: 2.5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(255,255,255,0.95)',
+              titleColor: '#333',
+              bodyColor: '#555',
+              borderColor: '#ddd',
+              borderWidth: 1,
+              callbacks: {
+                label: function(ctx) {
+                  return '负面率: ' + ctx.parsed.y + '%';
+                },
+                afterLabel: function(ctx) {
+                  var idx = currentNrIndices[ctx.dataIndex];
+                  return '负向: ' + nr.negative[idx] + ' / 总计: ' + nr.total[idx];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { size: 11 } }
+            },
+            y: {
+              ticks: { font: { size: 11 }, callback: function(v) { return v + '%'; } },
+              grid: { color: '#f0f0f0' },
+              title: { display: true, text: '负面率', font: { size: 12 }, color: '#999' },
+              beginAtZero: true
             }
           }
         }
-      }
+      });
+    } catch (e) {
+      console.error('Error rendering negative rate chart:', e);
     }
-  });
-}
 
-function applyFilter() {
-  const s = document.getElementById('startDate').value;
-  const e = document.getElementById('endDate').value;
-  if (s && e && s <= e) renderAll(s, e);
-}
+    // === Identity Pie Chart ===
+    try {
+      var id = rawData.identity;
+      var idLabels = [];
+      var idValues = [];
+      for (var mi = 0; mi < id.length; mi++) {
+        idLabels.push(id[mi].name);
+        idValues.push(id[mi].value);
+      }
 
-function resetFilter() {
-  const dr = rawData.summary.date_range;
-  document.getElementById('startDate').value = dr[0];
-  document.getElementById('endDate').value = dr[1];
-  document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
-  renderAll(dr[0], dr[1]);
-}
-
-function quickRange(days) {
-  document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  const maxD = rawData.summary.date_range[1];
-  const end = new Date(maxD);
-  if (days === 0) {
-    const minD = rawData.summary.date_range[0];
-    document.getElementById('startDate').value = minD;
-    document.getElementById('endDate').value = maxD;
-    renderAll(minD, maxD);
-  } else {
-    const start = new Date(end);
-    start.setDate(start.getDate() - days + 1);
-    const s = start.toISOString().slice(0,10);
-    document.getElementById('startDate').value = s;
-    document.getElementById('endDate').value = maxD;
-    renderAll(s, maxD);
+      if (identityChart) identityChart.destroy();
+      identityChart = new Chart(document.getElementById('identityChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: idLabels,
+          datasets: [{
+            data: idValues,
+            backgroundColor: PIE_COLORS,
+            borderColor: '#fff',
+            borderWidth: 3,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '52%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 12 } }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(255,255,255,0.95)',
+              titleColor: '#333',
+              bodyColor: '#555',
+              borderColor: '#ddd',
+              borderWidth: 1,
+              callbacks: {
+                label: function(ctx) {
+                  var total = 0;
+                  for (var ti = 0; ti < ctx.dataset.data.length; ti++) total += ctx.dataset.data[ti];
+                  var pct = (ctx.parsed / total * 100).toFixed(1);
+                  return ' ' + ctx.label + ': ' + ctx.parsed.toLocaleString() + ' (' + pct + '%)';
+                }
+              }
+            }
+          }
+        }
+      });
+    } catch (e) {
+      console.error('Error rendering identity chart:', e);
+    }
   }
-}
 
-loadData();
+  window.applyFilter = function() {
+    var s = document.getElementById('startDate').value;
+    var e = document.getElementById('endDate').value;
+    if (s && e && s <= e) renderAll(s, e);
+  };
+
+  window.resetFilter = function() {
+    var dr = rawData.summary.date_range;
+    document.getElementById('startDate').value = dr[0];
+    document.getElementById('endDate').value = dr[1];
+    var btns = document.querySelectorAll('.quick-btn');
+    for (var b = 0; b < btns.length; b++) btns[b].classList.remove('active');
+    renderAll(dr[0], dr[1]);
+  };
+
+  window.quickRange = function(days, btn) {
+    var btns = document.querySelectorAll('.quick-btn');
+    for (var b = 0; b < btns.length; b++) btns[b].classList.remove('active');
+    if (btn) btn.classList.add('active');
+    var maxD = rawData.summary.date_range[1];
+    var endDate = new Date(maxD + 'T00:00:00');
+    if (days === 0) {
+      var minD = rawData.summary.date_range[0];
+      document.getElementById('startDate').value = minD;
+      document.getElementById('endDate').value = maxD;
+      renderAll(minD, maxD);
+    } else {
+      var startDate = new Date(endDate);
+      startDate.setDate(startDate.getDate() - days + 1);
+      var s = startDate.getFullYear() + '-' + String(startDate.getMonth()+1).padStart(2,'0') + '-' + String(startDate.getDate()).padStart(2,'0');
+      document.getElementById('startDate').value = s;
+      document.getElementById('endDate').value = maxD;
+      renderAll(s, maxD);
+    }
+  };
+
+  // Initialize
+  loadData();
+})();
 </script>
 </body>
 </html>
